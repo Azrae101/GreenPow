@@ -157,16 +157,6 @@ input[type=range]{width:100%;accent-color:var(--blue);margin:10px 0 0;cursor:poi
   <p class="sub pop" data-pop style="--d:.5s">Idle GPUs, put to work for European medtech AI.</p>
 </div></section>
 
-<!-- 1 Stats -->
-<section class="slide dark hero" id="s3"><div class="wrap">
-  <h1 class="reveal" data-pop><span>A focused market with a measurable savings case.</span></h1>
-  <div class="stats">
-    <div class="stat pop" data-pop style="--d:.2s"><div class="n accent" data-count="25">25</div><div class="t">Low case · $1M average GPU spend · $25M total</div></div>
-    <div class="stat pop" data-pop style="--d:.45s"><div class="n" data-count="60">60</div><div class="t">Base case · $2M average GPU spend · $120M total</div></div>
-    <div class="stat pop" data-pop style="--d:.7s"><div class="n accent" data-count="120">120</div><div class="t">High case · $3M average GPU spend · $360M total</div></div>
-  </div>
-</div><div class="pg"></div></section>
-
 <!-- 2 Market -->
 <section class="slide" id="s4"><div class="wrap">
   <h2 class="h2 reveal" data-pop style="font-size:clamp(1.65rem,3.4vw,2.7rem);margin-bottom:12px"><span>The market: AI drug discovery</span></h2>
@@ -327,7 +317,7 @@ input[type=range]{width:100%;accent-color:var(--blue);margin:10px 0 0;cursor:poi
   function $$(s,r){return Array.prototype.slice.call((r||document).querySelectorAll(s))}
   function money(n){return '$'+Math.round(n).toLocaleString('en-US')}
   function num(n){return Math.round(n).toLocaleString('en-US')}
-  var slides=$$('.slide'),N=slides.length,idx=0,MAIN=6;
+  var slides=$$('.slide'),N=slides.length,idx=0,MAIN=5;
 
   function fitAll(){slides.forEach(function(sec){var w=$('.wrap',sec);if(!w)return;w.style.zoom=1;var cs=getComputedStyle(sec);var avail=sec.clientHeight-parseFloat(cs.paddingTop)-parseFloat(cs.paddingBottom);var need=w.scrollHeight;if(need>avail)w.style.zoom=Math.max(.45,avail/need*.98)})}
   window.addEventListener('resize',fitAll);
@@ -336,7 +326,7 @@ input[type=range]{width:100%;accent-color:var(--blue);margin:10px 0 0;cursor:poi
   slides.forEach(function(s,i){var p=$('.pg',s);if(p)p.textContent=i===0?'':i<=MAIN?i+' / '+MAIN:'Backup'});
 
   /* red thread */
-  var TH=['Numbers','Market','Example','Savings','Solution','Pilot'],th=$('#thread');
+  var TH=['Market','Example','Savings','Solution','Pilot'],th=$('#thread');
   th.innerHTML=TH.map(function(t){return '<span>'+t+'</span>'}).join('');
   function setThread(){th.classList.toggle('off',idx===0||idx>MAIN);$$('span',th).forEach(function(s,i){s.className=i+1===idx?'on':(i+1<idx?'done':'')})}
 
