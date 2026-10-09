@@ -74,8 +74,7 @@ p { margin: 0; }
 /* ---- slide 2: week grid ---- */
 .split { display: grid; grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr); gap: 48px; align-items: start; margin-top: 18px; }
 #weekGrid { display: grid; grid-template-columns: 34px repeat(24, minmax(0, 1fr)); gap: 3px; cursor: pointer; }
-#weekGrid .dl, #weekGrid .hl { font-size: 0.72rem; color: var(--muted); align-self: center; }
-#weekGrid .hl { align-self: end; padding-bottom: 2px; white-space: nowrap; }
+#weekGrid .dl { font-size: 0.72rem; color: var(--muted); align-self: center; }
 .c { aspect-ratio: 1 / 1; background: var(--idle); border-radius: 3px; transition: background 0.35s ease; }
 .c.owner { background: var(--navy); }
 .c.gp { background: var(--lime); }
@@ -490,9 +489,6 @@ table.t td { color: var(--muted); }
   /* ---------- week grid ---------- */
   var DAYS = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
   var grid = $('#weekGrid'), cells = [];
-  [[0, '00:00'], [6, '06:00'], [12, '12:00'], [18, '18:00']].forEach(function (a) {
-    var e = document.createElement('div'); e.className = 'hl'; e.textContent = a[1]; e.style.gridColumn = (a[0] + 2) + ' / span 4'; e.style.gridRow = '1'; grid.appendChild(e);
-  });
   DAYS.forEach(function (d, di) {
     var l = document.createElement('div'); l.className = 'dl'; l.textContent = d; l.style.gridColumn = '1'; l.style.gridRow = String(di + 2); grid.appendChild(l);
     cells[di] = [];
