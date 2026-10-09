@@ -1,0 +1,364 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>GreenPow for AI drug discovery</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--navy:#0B2A4A;--navy-2:#0D3C70;--blue:#2F8CE8;--lime:#8BD13F;--lime-ink:#3F7A0F;--paper:#F3F6FA;--white:#fff;--line:#D3DCE6;--muted:#4A6078;--idle:#DCE4EE;--red:#B3402A}
+*{box-sizing:border-box}
+html,body{height:100%;margin:0;overflow:hidden;background:var(--paper);color:var(--navy);font-family:'IBM Plex Sans',system-ui,sans-serif;line-height:1.45}
+h1,h2,h3{font-family:'Space Grotesk',system-ui,sans-serif;letter-spacing:-.015em;margin:0}
+p{margin:0}
+#deck{position:fixed;inset:0}
+.slide{position:absolute;inset:0;padding:26px 6vw 46px;display:flex;flex-direction:column;justify-content:center;overflow:hidden;background:var(--paper);opacity:0;visibility:hidden;transform:translateY(18px);transition:opacity .45s,transform .45s,visibility 0s linear .45s}
+.slide.active{opacity:1;visibility:visible;transform:none;transition:opacity .45s,transform .45s,visibility 0s}
+.wrap{max-width:1120px;margin:0 auto;width:100%}
+.dark{background:linear-gradient(135deg,var(--navy),var(--navy-2) 58%,#1B63B4);color:#fff}
+.white{background:var(--white)}
+.h2{font-size:clamp(1.9rem,4vw,3.1rem);line-height:1.06;font-weight:700;max-width:22ch;margin-bottom:16px}
+.small{font-size:.85rem;color:var(--muted)}
+.dark .small{color:#A9C0DA}
+.pg{position:absolute;right:4vw;bottom:12px;font-size:.8rem;color:var(--muted)}
+.dark .pg{color:#A9C0DA}
+#dots{position:absolute;left:50%;bottom:10px;transform:translateX(-50%);display:flex;gap:9px;z-index:10}
+#dots button{width:10px;height:10px;border-radius:50%;border:0;padding:0;background:#8499B0;opacity:.55;cursor:pointer;transition:all .25s}
+#dots button.on{background:var(--blue);opacity:1;transform:scale(1.35)}
+.reveal{display:block;overflow:hidden;padding-bottom:.1em}
+.reveal>span{display:inline-block;transform:translateY(110%);transition:transform .95s cubic-bezier(.2,.8,.2,1)}
+.reveal.in>span{transform:none}
+.pop{opacity:0;transform:scale(.88);transition:opacity .5s,transform .7s cubic-bezier(.34,1.56,.64,1);transition-delay:var(--d,0s)}
+.pop.in{opacity:1;transform:none}
+@media(prefers-reduced-motion:reduce){.slide,.slide.active{transition:none;transform:none}.reveal>span{transform:none;transition:none}.pop{opacity:1;transform:none;transition:none}}
+/* 0 */
+.intro{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);gap:48px;align-items:center}
+.eyebrow{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:1.1rem;letter-spacing:.08em;text-transform:uppercase;color:var(--lime-ink);margin-bottom:18px}
+.intro h1{font-size:clamp(2.6rem,6vw,5.2rem);line-height:1.03;font-weight:700;max-width:12ch;margin-bottom:22px}
+.intro .sub{font-size:clamp(1.1rem,1.8vw,1.45rem);color:var(--muted);max-width:30ch}
+.crane{width:100%;max-width:420px;margin:0 auto;display:block}
+.zz{font-family:'Space Grotesk',sans-serif;font-weight:700;fill:var(--blue);opacity:0;animation:zz 3s ease-in-out infinite}
+.zz:nth-of-type(2){animation-delay:.6s}.zz:nth-of-type(3){animation-delay:1.2s}
+@keyframes zz{0%,100%{opacity:0;transform:translateY(6px)}50%{opacity:.9;transform:none}}
+@media(prefers-reduced-motion:reduce){.zz{animation:none;opacity:.8}}
+/* 1 */
+.hero h1{font-size:clamp(2.4rem,5.6vw,4.8rem);line-height:1.03;font-weight:700;max-width:16ch;margin-bottom:10px}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:34px}
+.stat .n{font-family:'Space Grotesk',sans-serif;font-size:clamp(3rem,7vw,5.6rem);font-weight:700;line-height:1}
+.stat .n.accent{color:var(--lime)}
+.stat .t{margin-top:8px;color:#C5D6EA;font-size:1.1rem}
+.chips{display:flex;flex-wrap:wrap;gap:10px;margin-top:22px}
+.chips span{border:1px solid rgba(255,255,255,.35);border-radius:99px;padding:6px 16px;font-size:1rem;color:#E4EEFA}
+.chips b{color:var(--lime);font-family:'Space Grotesk',sans-serif}
+/* 2 */
+.split{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(0,1fr);gap:48px;align-items:center;margin-top:10px}
+#weekGrid{display:grid;grid-template-columns:34px repeat(24,minmax(0,1fr));gap:3px;cursor:pointer}
+#weekGrid .dl{font-size:.72rem;color:var(--muted);align-self:center}
+#weekGrid .hl{font-size:.55rem;color:var(--muted);text-align:center;align-self:end}
+.c{aspect-ratio:1/1;background:var(--idle);border-radius:3px;transition:background .35s}
+.c.owner{background:var(--navy)}.c.gp{background:var(--lime)}
+.c.pc{animation:cellpop .55s cubic-bezier(.34,1.56,.64,1) both;animation-delay:var(--cd,0ms)}
+@keyframes cellpop{0%{transform:scale(.3)}100%{transform:scale(1)}}
+.legend{display:flex;flex-wrap:wrap;gap:8px 20px;margin-top:12px;font-size:.86rem;color:var(--muted)}
+.legend i{display:inline-block;width:12px;height:12px;border-radius:3px;margin-right:6px;vertical-align:-1px}
+.state{padding:14px 0 14px 18px;border-left:4px solid var(--line);opacity:.32;transition:opacity .5s,border-color .5s}
+.state.on{opacity:1}
+.state[data-s="1"].on{border-color:var(--navy)}
+.state[data-s="2"].on{border-color:var(--lime)}
+.state .big{font-family:'Space Grotesk',sans-serif;font-size:3rem;font-weight:700;line-height:1.05}
+.state .big small{font-family:'IBM Plex Sans',sans-serif;font-size:.95rem;font-weight:400;color:var(--muted);margin-left:8px}
+.rules3{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:22px}
+.rules3>div{border-left:4px solid var(--blue);padding:2px 0 2px 12px;font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:1.1rem}
+.rules3 span{display:block;font-family:'IBM Plex Sans',sans-serif;font-weight:400;color:var(--muted);font-size:.95rem}
+/* 4 */
+.panel{background:var(--paper);border:1px solid var(--line);padding:18px}
+.calc{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:32px;margin-top:10px;align-items:start}
+.field{margin-bottom:12px}
+.field .top{display:flex;justify-content:space-between;align-items:baseline;gap:12px}
+.field label{font-weight:600}
+.field .val{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:1.15rem;white-space:nowrap}
+input[type=range]{width:100%;accent-color:var(--blue);margin:4px 0 0}
+.verdict-line{font-family:'Space Grotesk',sans-serif;font-size:clamp(1.8rem,3.4vw,2.7rem);font-weight:700;line-height:1.1}
+.verdict-line.neg{color:var(--red)}
+.verdict-line b{color:var(--lime-ink)}
+.bars{margin:16px 0 8px;display:grid;gap:10px}
+.lab{display:flex;justify-content:space-between;font-size:.92rem;margin-bottom:4px}
+.lab span:last-child{font-family:'Space Grotesk',sans-serif;font-weight:700}
+.track{height:28px;background:var(--idle);border-radius:4px;overflow:hidden}
+.fill{height:100%;width:0;transition:width .7s cubic-bezier(.2,.8,.2,1)}
+.fill.ded{background:var(--navy)}.fill.gp{background:var(--lime)}
+.forgp{margin-top:14px;padding:10px 14px;background:var(--white);border-left:4px solid var(--blue);font-size:.95rem}
+.forgp b{font-family:'Space Grotesk',sans-serif}
+.forgp div+div{margin-top:4px}
+/* 5 */
+.fd{display:grid;grid-template-columns:1fr 1fr;gap:48px;margin-top:14px;align-items:start}
+.fd h3{font-size:1.2rem;margin-bottom:8px;color:var(--lime-ink)}
+.tier{display:flex;justify-content:space-between;align-items:baseline;padding:12px 0;border-top:1px solid var(--line);font-weight:600;font-size:1.15rem}
+.px{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:2rem;color:var(--blue)}
+.px small{font-size:.85rem;color:var(--muted);font-weight:500}
+.take{margin-top:12px;font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:1.2rem}
+.take span{color:var(--lime-ink)}
+.dist>div{padding:12px 0;border-top:1px solid var(--line);font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:1.25rem}
+.dist span{display:block;font-family:'IBM Plex Sans',sans-serif;font-weight:400;font-size:1rem;color:var(--muted)}
+/* 6 */
+.pilot{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:44px;margin-top:14px;align-items:center}
+.hyp{font-family:'Space Grotesk',sans-serif;font-size:clamp(1.6rem,3vw,2.4rem);font-weight:700;line-height:1.2}
+.hyp div{padding:6px 0 6px 16px;border-left:3px solid rgba(255,255,255,.35);margin-bottom:8px}
+.hyp b{color:var(--lime)}
+.tester{background:rgba(255,255,255,.08);padding:18px;border:1px solid rgba(255,255,255,.22)}
+.chk{display:inline-flex;gap:8px;align-items:center;cursor:pointer}
+.vd{font-family:'Space Grotesk',sans-serif;font-size:1.8rem;font-weight:700;margin-top:8px}
+.vd.pay{color:var(--lime)}.vd.stop{color:#FF9C86}.vd.mid{color:#9CC8F5}
+.ask{margin-top:26px;font-family:'Space Grotesk',sans-serif;font-size:clamp(1.4rem,2.8vw,2.1rem);font-weight:700;max-width:30ch}
+.ask span{color:var(--lime)}
+/* backups */
+.bmc{display:grid;grid-template-columns:repeat(10,1fr);grid-template-areas:"kp kp ka ka vp vp cr cr cs cs" "kp kp kr kr vp vp ch ch cs cs" "co co co co co rs rs rs rs rs";gap:6px;margin-top:10px}
+.bmc>div{border:1px solid var(--line);background:#fff;padding:10px 12px;font-size:.9rem;color:var(--muted);line-height:1.35}
+.bmc b{display:block;font-family:'Space Grotesk',sans-serif;color:var(--navy);margin-bottom:2px}
+.bmc .vp{background:var(--navy);color:#D3E1F1;border-color:var(--navy)}
+.bmc .vp b{color:#fff}
+.bmc .rs{border:2px solid var(--lime)}
+.swot{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:12px}
+.swot>div{border:1px solid var(--line);background:var(--paper);padding:12px 16px}
+.swot h3{font-size:1.1rem;margin-bottom:4px}
+.swot .s h3{color:var(--lime-ink)}.swot .w h3{color:var(--red)}.swot .o h3{color:var(--blue)}.swot .th h3{color:var(--navy-2)}
+.swot ul{margin:0;padding-left:1.1em;color:var(--muted);font-size:1rem}
+@media(max-width:860px){.intro,.stats,.rules3,.split,.calc,.pilot,.fd,.swot{grid-template-columns:1fr}.bmc{grid-template-columns:1fr;grid-template-areas:none}.bmc>div{grid-area:auto!important}}
+/* intro */
+.t0{text-align:center}
+.t0 h1{font-size:clamp(1.8rem,4vw,3rem);font-weight:700;color:var(--navy)}
+.crew{display:flex;flex-wrap:wrap;justify-content:center;align-items:baseline;gap:0 .3em;font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:clamp(2.8rem,10.5vw,9rem);line-height:1.1;margin-top:10px}
+.crew .pop{display:inline-block}
+.crew .p1{color:var(--lime-ink)}.crew .p2{color:var(--blue)}.crew .p3{color:var(--navy-2)}
+.crew .p1,.crew .p2,.crew .p3{transition-duration:.5s,.8s}
+.cap{margin-top:12px;font-size:.85rem;color:var(--muted)}
+/* dot stories */
+.story{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.4fr);gap:40px;align-items:center}
+.csw{display:grid}.cs{grid-area:1/1;opacity:0;transition:opacity .5s;pointer-events:none}.cs.on{opacity:1}
+.cs .h2{font-size:clamp(1.7rem,3.2vw,2.6rem);max-width:15ch;margin-bottom:12px}
+.cs p{font-size:1.15rem;color:var(--muted);max-width:30ch}
+.dd{fill:var(--idle);transition:fill .45s}
+.dd.burst{fill:var(--navy)}.dd.moved{fill:var(--lime)}
+.dl2{font:500 11px 'IBM Plex Sans',sans-serif;fill:var(--muted)}
+#storyLg span{opacity:0;transition:opacity .5s}#storyLg span.on{opacity:1}
+.bd{transform:scale(0);transform-box:fill-box;transform-origin:center;transition:transform .5s cubic-bezier(.34,1.56,.64,1);transition-delay:var(--d,0s)}
+.in .bd{transform:none}
+.bl{font:700 16px 'Space Grotesk',sans-serif;fill:var(--navy)}.bt{font:400 13px 'IBM Plex Sans',sans-serif;fill:var(--muted)}
+.wf{display:grid;grid-template-columns:repeat(10,16px);gap:5px;flex:none}
+.wf i{width:16px;height:16px;border-radius:50%;background:var(--idle);transition:background .4s,box-shadow .4s}
+.wf i.c{background:#E3F3CB;box-shadow:inset 0 0 0 2px var(--lime)}.wf i.b{background:var(--lime)}
+.wfrow{display:flex;gap:26px;align-items:center;margin:16px 0}
+.wfk div{margin-bottom:9px;line-height:1.3;font-size:.95rem}.wfk b{display:block;font-family:'Space Grotesk',sans-serif}
+.sw{display:inline-block;width:12px;height:12px;border-radius:50%;background:var(--idle);margin-right:7px}
+.sw.b{background:var(--lime)}.sw.c{background:#E3F3CB;box-shadow:inset 0 0 0 2px var(--lime)}
+@media(max-width:860px){.story{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div id="deck">
+
+<!-- 0 Intro -->
+<section class="slide" id="s0"><div class="wrap t0">
+  <h1 class="pop" data-pop>GreenPow</h1>
+  <div class="crew">
+    <span class="pop" data-pop style="--d:.3s">Gr</span>
+    <span class="pop p1" data-pop style="--d:.7s">Pow</span>
+    <span class="pop p2" data-pop style="--d:1.1s">Pow</span>
+    <span class="pop p3" data-pop style="--d:1.5s">Pow</span>
+  </div>
+</div><div class="pg"></div></section>
+
+<!-- 1 Story: one week of dots -->
+<section class="slide white" id="s1"><div class="wrap">
+  <div class="story">
+    <div class="csw">
+      <div class="cs on"><h2 class="h2">One cluster. One week.</h2><p>Each dot is one hour of GPU time. All 168 are idle.</p></div>
+      <div class="cs"><h2 class="h2">A campaign runs. Then the GPUs wait.</h2><p>Design cycles last 6 weeks to 6 months. Teams pay for the peak.</p></div>
+      <div class="cs"><h2 class="h2">GreenPow fills the gaps.</h2><p>Work that can wait moves to cheaper capacity: cloud, on-premise or supercomputer.</p></div>
+    </div>
+    <div>
+      <svg id="storySvg" viewBox="0 0 580 196" role="img" aria-label="168 dots, one per hour of a week on one GPU cluster"></svg>
+      <div class="legend" id="storyLg">
+        <span class="on"><i style="background:var(--idle)"></i>Idle</span>
+        <span id="lg1"><i style="background:var(--navy)"></i>Campaign burst</span>
+        <span id="lg2"><i style="background:var(--lime)"></i>Moved by GreenPow</span>
+      </div>
+      <div class="cap">Illustrative. Sources: Cradle via Union.ai, Aqemia job post. No company discloses its idle GPU time.</div>
+    </div>
+  </div>
+</div><div class="pg"></div></section>
+
+<!-- 3 Buyer -->
+<section class="slide" id="s3"><div class="wrap">
+  <h2 class="h2 reveal" data-pop><span>Our buyer runs batches, not live apps.</span></h2>
+  <div class="story" style="grid-template-columns:minmax(0,.8fr) minmax(0,1.5fr)">
+    <div class="dist pop" data-pop style="--d:.2s">
+      <div>$1M+ a year<span>spent on GPUs</span></div>
+      <div>Batch work<span>deadline-driven, not interactive</span></div>
+      <div>1 to 5 people<span>an ML or platform team that integrates in weeks</span></div>
+      <div>Free to move<span>one compute venue not locked by contract</span></div>
+    </div>
+    <div>
+      <svg id="buyerSvg" viewBox="0 0 660 300" role="img" aria-label="Qualifying companies in three cases: 25, 60 and 120"></svg>
+      <div class="cap">One dot is one qualifying company. Dot area is average GPU spend. Our estimate: no census exists. Contact: head of ML platform. Budget: the CTO.</div>
+    </div>
+  </div>
+</div><div class="pg"></div></section>
+
+<!-- 4 Demo -->
+<section class="slide white" id="s4"><div class="wrap">
+  <h2 class="h2 reveal" data-pop><span>Example: Aqemia, Paris.</span></h2>
+  <div class="calc" data-pop>
+    <div class="panel">
+      <div class="field"><div class="top"><label for="spend">GPU spend a year (assumed)</label><span class="val" id="spendv"></span></div><input type="range" id="spend" min="1000000" max="3000000" step="100000" value="2000000"></div>
+      <div class="field"><div class="top"><label for="share">Share that can wait</label><span class="val" id="sharev"></span></div><input type="range" id="share" min="0" max="100" step="5" value="50"></div>
+      <div class="field"><div class="top"><label for="real">Savings realised</label><span class="val" id="realv"></span></div><input type="range" id="real" min="0" max="100" step="5" value="75"></div>
+      <div class="field"><div class="top"><label for="claim">GreenPow's claim (unverified)</label><span class="val" id="claimv"></span></div><input type="range" id="claim" min="0" max="20" step="1" value="16"></div>
+      <div class="field" style="margin-bottom:0"><div class="top"><label for="adopt">Adoption cost</label><span class="val" id="adoptv"></span></div><input type="range" id="adopt" min="0" max="120000" step="5000" value="60000"></div>
+    </div>
+    <div class="panel">
+      <div class="verdict-line" id="headline"></div>
+      <div class="wfrow">
+        <div class="wf" id="waffle" aria-label="100 dots, one per $1 of every $100 of GPU spend"></div>
+        <div class="wfk">
+          <div><b><span class="sw b"></span>Base case</b><span id="bTxt"></span></div>
+          <div><b><span class="sw c"></span>GreenPow's claim</b><span id="cTxt"></span></div>
+          <div><b>After adoption cost</b><span id="nTxt"></span></div>
+          <div class="small">One dot is $1 of every $100 spent on GPUs.</div>
+        </div>
+      </div>
+      <div class="forgp"><div><b>Pool, base case:</b> 60 companies, $120M of GPU spend. At 6%, about $7M a year to customers.</div><div><b>GreenPow:</b> at a $25k fee, about $1.5M a year. Placeholders.</div></div>
+      <div class="small" style="margin-top:8px">Aqemia's spend is our assumption. It appears to use one cloud and has about 12 engineers who could build tools themselves.</div>
+    </div>
+  </div>
+</div><div class="pg"></div></section>
+
+<!-- 5 Pilot -->
+<section class="slide dark" id="s5"><div class="wrap">
+  <h2 class="h2 reveal" data-pop><span>Next: prove it on real GPU bills.</span></h2>
+  <div class="pilot">
+    <div class="hyp" style="display:grid;gap:8px;">
+      <div class="pop" data-pop style="--d:.1s"><b>5</b> target companies</div>
+      <div class="pop" data-pop style="--d:.25s"><b>50%</b> of work can wait</div>
+      <div class="pop" data-pop style="--d:.4s"><b>75%</b> of savings realised</div>
+    </div>
+    <div class="tester pop" data-pop style="--d:.3s">
+      <div style="font-family:'Space Grotesk',sans-serif;font-size:1.2rem;font-weight:700;margin-bottom:10px">If the pilot shows this, we decide:</div>
+      <div class="field"><div class="top"><label for="meas">Share that can wait</label><span class="val" id="measv"></span></div><input type="range" id="meas" min="0" max="100" step="5" value="50"></div>
+      <div class="field"><div class="top"><label for="dl">Savings realised</label><span class="val" id="dlv"></span></div><input type="range" id="dl" min="0" max="100" step="5" value="75"></div>
+      <label class="chk"><input type="checkbox" id="viol"> No Slurm or AMD GPU support</label>
+      <div class="vd" id="vd"></div>
+    </div>
+  </div>
+  <div class="small pop" data-pop style="--d:.2s;margin-top:18px">Data needed: real GPU spend, GreenPow's pricing, free options such as LUMI hours and SkyPilot.</div>
+  <div class="ask pop" data-pop style="--d:.4s">GreenPow turns <span>idle GPU-hours</span> into useful work.</div>
+</div><div class="pg"></div></section>
+
+<!-- Backup -->
+<section class="slide white" id="s7"><div class="wrap">
+  <h2 class="h2" style="font-size:1.6rem;margin-bottom:0">Backup: Aqemia and what to verify</h2>
+  <div class="fd">
+    <div><h3>Aqemia (Paris)</h3><div class="dist">
+      <div>Funding<span>$100M total, including $38M in December 2024</span></div>
+      <div>Partner<span>Sanofi, up to $140M (December 2023)</span></div>
+      <div>Team<span>50+ people, about 12 engineers</span></div>
+      <div>Compute<span>AWS and Kubernetes, bursty GPU campaigns</span></div>
+    </div></div>
+    <div><h3>Verify next</h3><div class="dist">
+      <div>Engine<span>Slurm and AMD GPUs, used by LUMI</span></div>
+      <div>Savings<span>What real customers measured from orchestration alone</span></div>
+      <div>Pricing<span>GreenPow's is unknown</span></div>
+      <div>Competition<span>Free capacity and free tools</span></div>
+    </div></div>
+  </div>
+  <div class="small" style="margin-top:8px">The 16% is the founder's claim. Sources: BiopharmaTrend, Fierce Biotech, Aqemia job post.</div>
+</div><div class="pg"></div></section>
+
+<div id="dots" role="tablist" aria-label="Slides"></div>
+</div>
+
+<script>
+(function(){
+  var REDUCED=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function $(s,r){return (r||document).querySelector(s)}
+  function $$(s,r){return Array.prototype.slice.call((r||document).querySelectorAll(s))}
+  function money(n){return '$'+Math.round(n).toLocaleString('en-US')}
+  function num(n){return Math.round(n).toLocaleString('en-US')}
+  var slides=$$('.slide'),N=slides.length,idx=0,MAIN=5;
+
+  function fitAll(){slides.forEach(function(sec){var w=$('.wrap',sec);if(!w)return;w.style.zoom=1;var cs=getComputedStyle(sec);var avail=sec.clientHeight-parseFloat(cs.paddingTop)-parseFloat(cs.paddingBottom);var need=w.scrollHeight;if(need>avail)w.style.zoom=Math.max(.45,avail/need*.98)})}
+  window.addEventListener('resize',fitAll);
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(fitAll);
+  fitAll();setTimeout(fitAll,500);setTimeout(fitAll,1500);
+  slides.forEach(function(s,i){$('.pg',s).textContent=i<MAIN?(i+1)+' / '+MAIN:'Backup'});
+
+  function fmt(el,v){return (el.getAttribute('data-prefix')||'')+Math.round(v).toLocaleString('en-US')+(el.getAttribute('data-suffix')||'')}
+  function runCount(el){var to=parseFloat(el.getAttribute('data-count'));if(REDUCED){el.textContent=fmt(el,to);return}el.textContent=fmt(el,0);var t0=performance.now();(function tick(t){var p=Math.min((t-t0)/1300,1),e=1-Math.pow(1-p,3);el.textContent=fmt(el,to*e);if(p<1)requestAnimationFrame(tick)})(t0)}
+
+  /* dot stories */
+  var svg=$('#storySvg'),dd=[],STEP=0,STEPS=3,sh='',d,h;
+  [0,6,12,18].forEach(function(hh){sh+='<text class="dl2" x="'+(40+hh*22.5)+'" y="10">'+String(hh).padStart(2,'0')+'</text>'});
+  ['Mon','Tue','Wed','Thu','Fri','Sat','Sun'].forEach(function(n,di){sh+='<text class="dl2" x="0" y="'+(32+di*24)+'">'+n+'</text>'});
+  for(d=0;d<7;d++)for(h=0;h<24;h++)sh+='<circle class="dd" cx="'+(46+h*22.5)+'" cy="'+(28+d*24)+'" r="8.6" style="transition-delay:'+((d*24+h)*7)+'ms"/>';
+  svg.insertAdjacentHTML('beforeend',sh);
+  $$('.dd',svg).forEach(function(c,i){var dy=Math.floor(i/24),hr=i%24;dd.push({el:c,burst:dy<3||(dy===3&&hr<=10),moved:(dy===3&&hr>10)||dy===4||(dy===5&&hr<=12)})});
+  function setStep(n){STEP=n;dd.forEach(function(o){o.el.classList.toggle('burst',n>=1&&o.burst);o.el.classList.toggle('moved',n>=2&&o.moved)});$$('.cs').forEach(function(c,i){c.classList.toggle('on',i===n)});$('#lg1').classList.toggle('on',n>=1);$('#lg2').classList.toggle('on',n>=2)}
+  var bsvg=$('#buyerSvg'),BG=[{n:25,r:6,c:5,l:'Low',t:'25 companies, $25M',f:'#9CC8F5'},{n:60,r:8.5,c:10,l:'Base',t:'60 companies, $120M',f:'#8BD13F'},{n:120,r:10.4,c:12,l:'High',t:'120 companies, $360M',f:'#0D3C70'}],bx=10,bh='';
+  BG.forEach(function(g,gi){var sp=g.r*2+3;for(var i=0;i<g.n;i++)bh+='<circle class="bd" fill="'+g.f+'" cx="'+(bx+(i%g.c)*sp+g.r)+'" cy="'+(246-g.r-Math.floor(i/g.c)*sp)+'" r="'+g.r+'" style="--d:'+(gi*.25+i*.012).toFixed(2)+'s"/>';bh+='<text class="bl" x="'+bx+'" y="272">'+g.l+'</text><text class="bt" x="'+bx+'" y="291">'+g.t+'</text>';bx+=g.c*sp+40});
+  bsvg.insertAdjacentHTML('beforeend',bh);setStep(0);
+
+  /* calculator */
+  var inp={};['spend','share','real','claim','adopt'].forEach(function(i){inp[i]=$('#'+i);inp[i].addEventListener('input',calc)});
+  var calcLive=false,wfs=[];(function(){var w=$('#waffle');for(var i=0;i<100;i++){var e=document.createElement('i');e.style.transitionDelay=(i*7)+'ms';w.appendChild(e);wfs.push(e)}})();
+  function calc(){
+    var S=+inp.spend.value,W=+inp.share.value/100,R=+inp.real.value/100,C=+inp.claim.value/100,A=+inp.adopt.value;
+    $('#spendv').textContent=money(S);$('#sharev').textContent=Math.round(W*100)+'%';$('#realv').textContent=Math.round(R*100)+'%';$('#claimv').textContent=Math.round(C*100)+'%';$('#adoptv').textContent=money(A);
+    var cl=S*C,base=S*W*R*C,net=base-A,hl=$('#headline');
+    if(net>=0){hl.className='verdict-line';hl.innerHTML='Aqemia nets <b>'+money(net)+'</b> a year ('+(W*R*C*100).toFixed(1)+'% base case)'}
+    else{hl.className='verdict-line neg';hl.innerHTML='Aqemia loses '+money(-net)+' after adoption cost'}
+    $('#cTxt').textContent=money(cl)+' / year';$('#bTxt').textContent=money(base)+' / year';$('#nTxt').textContent=money(Math.max(net,0))+' / year';
+    var bp=calcLive?Math.round(W*R*C*100):0,cp=calcLive?Math.round(C*100):0;wfs.forEach(function(e,i){e.className=i<bp?'b':(i<cp?'c':'')});
+  }
+  calc();
+
+  /* pilot verdict */
+  function verdict(){
+    var m=+$('#meas').value,r=+$('#dl').value,v=$('#viol').checked,el=$('#vd'),eff=16*m/100*r/100;
+    $('#measv').textContent=m+'%';$('#dlv').textContent=r+'%';
+    if(v){el.className='vd stop';el.textContent='Fix the engine first'}
+    else if(eff>=5.99){el.className='vd pay';el.textContent='Saves '+eff.toFixed(1)+'%: continue'}
+    else if(eff<3){el.className='vd stop';el.textContent='Saves '+eff.toFixed(1)+'%: stop and rethink'}
+    else{el.className='vd mid';el.textContent='Saves '+eff.toFixed(1)+'%: keep testing'}
+  }
+  ['meas','dl'].forEach(function(i){$('#'+i).addEventListener('input',verdict)});$('#viol').addEventListener('change',verdict);verdict();
+
+  $$('input').forEach(function(i){i.addEventListener(i.type==='range'?'pointerup':'change',function(){i.blur()})});
+
+  /* navigation */
+  var dots=$('#dots');
+  slides.forEach(function(s,i){var b=document.createElement('button');b.type='button';b.setAttribute('aria-label','Slide '+(i+1));b.addEventListener('click',function(){show(i);b.blur()});dots.appendChild(b)});
+  function setDots(){$$('#dots button').forEach(function(b,i){b.classList.toggle('on',i===idx)})}
+  function enter(i){var s=slides[i];$$('[data-pop]',s).forEach(function(el){el.classList.remove('in')});void s.offsetWidth;$$('[data-pop]',s).forEach(function(el){el.classList.add('in')});$$('[data-count]',s).forEach(runCount);if(s.id==='s1')setStep(0);if(s.id==='s3')bsvg.classList.add('in');if(s.id==='s4'){calcLive=true;setTimeout(calc,350)}}
+  function leave(i){var s=slides[i];$$('[data-pop]',s).forEach(function(el){el.classList.remove('in')});if(s.id==='s3')bsvg.classList.remove('in');if(s.id==='s4'){calcLive=false;calc()}}
+  function show(n){n=Math.max(0,Math.min(N-1,n));if(n===idx)return;var old=idx;idx=n;slides[old].classList.remove('active');slides[n].classList.add('active');setDots();setTimeout(function(){if(idx!==old)leave(old)},480);enter(n)}
+  function go(dir){if(slides[idx].id==='s1'){if(dir>0&&STEP<STEPS-1){setStep(STEP+1);return}if(dir<0&&STEP>0){setStep(STEP-1);return}}show(idx+dir)}
+  document.addEventListener('keydown',function(e){
+    var tag=e.target&&e.target.tagName;
+    if(/^(INPUT|TEXTAREA|SELECT)$/.test(tag)||e.metaKey||e.ctrlKey||e.altKey)return;
+    var k=e.key;if(k===' '&&tag==='BUTTON')return;
+    if(k==='ArrowRight'||k==='ArrowDown'||k==='PageDown'||k===' '){e.preventDefault();go(1)}
+    else if(k==='ArrowLeft'||k==='ArrowUp'||k==='PageUp'){e.preventDefault();go(-1)}
+    else if(k==='Home'){e.preventDefault();show(0)}
+    else if(k==='End'){e.preventDefault();show(N-1)}
+  });
+  var wLock=false,wTimer=null;
+  document.addEventListener('wheel',function(e){if(e.ctrlKey)return;var d=Math.abs(e.deltaY)>=Math.abs(e.deltaX)?e.deltaY:e.deltaX;if(Math.abs(d)<4)return;e.preventDefault();if(!wLock){wLock=true;go(d>0?1:-1)}clearTimeout(wTimer);wTimer=setTimeout(function(){wLock=false},240)},{passive:false});
+  var ty=null;
+  document.addEventListener('touchstart',function(e){ty=e.touches[0].clientY},{passive:true});
+  document.addEventListener('touchend',function(e){if(ty===null)return;var dy=ty-e.changedTouches[0].clientY;ty=null;if(Math.abs(dy)>50)go(dy>0?1:-1)},{passive:true});
+  setDots();setTimeout(function(){enter(0)},150);
+})();
+</script>
+</body>
+</html>

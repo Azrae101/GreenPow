@@ -3,239 +3,259 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>GreenPow for European health AI</title>
+<title>GreenPow for European medtech AI</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
 :root{--navy:#0B2A4A;--navy-2:#0D3C70;--blue:#2F8CE8;--lime:#8BD13F;--lime-ink:#3F7A0F;--paper:#F3F6FA;--white:#fff;--line:#D3DCE6;--muted:#4A6078;--idle:#DCE4EE;--red:#B3402A}
 *{box-sizing:border-box}
-html,body{height:100%;margin:0;overflow:hidden;background:var(--paper);color:var(--navy);font-family:'IBM Plex Sans',system-ui,sans-serif;line-height:1.45}
+html,body{height:100%;margin:0;overflow:hidden;background:var(--navy);color:var(--navy);font-family:'IBM Plex Sans',system-ui,sans-serif;line-height:1.45}
 h1,h2,h3{font-family:'Space Grotesk',system-ui,sans-serif;letter-spacing:-.015em;margin:0}
 p{margin:0}
 #deck{position:fixed;inset:0}
-.slide{position:absolute;inset:0;padding:26px 6vw 46px;display:flex;flex-direction:column;justify-content:center;overflow:hidden;background:var(--paper);opacity:0;visibility:hidden;transform:translateY(18px);transition:opacity .45s,transform .45s,visibility 0s linear .45s}
+.slide{position:absolute;inset:0;padding:54px 6vw 50px;display:flex;flex-direction:column;justify-content:center;overflow:hidden;background:var(--paper);opacity:0;visibility:hidden;transform:translateY(18px);transition:opacity .45s,transform .45s,visibility 0s linear .45s}
 .slide.active{opacity:1;visibility:visible;transform:none;transition:opacity .45s,transform .45s,visibility 0s}
 .wrap{max-width:1120px;margin:0 auto;width:100%}
 .dark{background:linear-gradient(135deg,var(--navy),var(--navy-2) 58%,#1B63B4);color:#fff}
 .white{background:var(--white)}
 .h2{font-size:clamp(1.9rem,4vw,3.1rem);line-height:1.06;font-weight:700;max-width:22ch;margin-bottom:16px}
-.small{font-size:.85rem;color:var(--muted)}
-.dark .small{color:#A9C0DA}
-.pg{position:absolute;right:4vw;bottom:12px;font-size:.8rem;color:var(--muted)}
-.dark .pg{color:#A9C0DA}
-#dots{position:absolute;left:50%;bottom:10px;transform:translateX(-50%);display:flex;gap:9px;z-index:10}
+.small{font-size:.85rem;color:var(--muted)}.dark .small{color:#A9C0DA}
+.sub{font-size:clamp(1.1rem,1.9vw,1.5rem);color:var(--muted);max-width:32ch}
+.dark .sub{color:#C5D6EA}
+.pg{position:absolute;right:4vw;bottom:14px;font-size:.8rem;color:var(--muted)}.dark .pg{color:#A9C0DA}
+#dots{position:absolute;left:50%;bottom:12px;transform:translateX(-50%);display:flex;gap:9px;z-index:10}
 #dots button{width:10px;height:10px;border-radius:50%;border:0;padding:0;background:#8499B0;opacity:.55;cursor:pointer;transition:all .25s}
 #dots button.on{background:var(--blue);opacity:1;transform:scale(1.35)}
+.arrow{position:absolute;top:50%;z-index:10;width:46px;height:46px;margin-top:-23px;border-radius:50%;border:1px solid rgba(132,153,176,.55);background:rgba(255,255,255,.75);color:var(--navy);font-size:1.4rem;cursor:pointer;display:grid;place-items:center;opacity:.55;transition:opacity .2s}
+.arrow:hover{opacity:1}#prev{left:12px}#next{right:12px}
+#thread{position:absolute;top:16px;left:50%;transform:translateX(-50%);display:flex;gap:6px;z-index:10;transition:opacity .4s}
+#thread.off{opacity:0}
+#thread span{font:700 .72rem 'Space Grotesk',sans-serif;letter-spacing:.06em;text-transform:uppercase;padding:4px 10px;border-radius:99px;background:rgba(132,153,176,.22);color:#6F849B;transition:all .3s}
+#thread span.done{background:rgba(139,209,63,.35);color:var(--lime-ink)}
+#thread span.on{background:var(--blue);color:#fff}
 .reveal{display:block;overflow:hidden;padding-bottom:.1em}
 .reveal>span{display:inline-block;transform:translateY(110%);transition:transform .95s cubic-bezier(.2,.8,.2,1)}
 .reveal.in>span{transform:none}
 .pop{opacity:0;transform:scale(.88);transition:opacity .5s,transform .7s cubic-bezier(.34,1.56,.64,1);transition-delay:var(--d,0s)}
 .pop.in{opacity:1;transform:none}
 @media(prefers-reduced-motion:reduce){.slide,.slide.active{transition:none;transform:none}.reveal>span{transform:none;transition:none}.pop{opacity:1;transform:none;transition:none}}
-/* 1 */
-.hero h1{font-size:clamp(2.4rem,5.6vw,4.8rem);line-height:1.03;font-weight:700;max-width:16ch;margin-bottom:10px}
+/* title */
+.t0{text-align:left}
+.lg{height:74px;margin-bottom:34px;display:flex;align-items:center}
+.lg img{height:100%;display:none}.lg.ok img{display:block}.lg.ok .ph{display:none}
+.ph{display:flex;align-items:center;gap:12px;font:500 2.4rem 'Space Grotesk',sans-serif;color:#fff}
+.ph i{width:52px;height:52px;border-radius:12px;background:#fff;display:block;position:relative}
+.ph i:after{content:"logo";position:absolute;inset:0;display:grid;place-items:center;font:700 .7rem 'IBM Plex Sans';color:var(--navy)}
+.t0 h1{font-size:clamp(2.6rem,6vw,5rem);line-height:1.03;font-weight:700;max-width:14ch;margin-bottom:20px}
+.t0 h1 b{color:var(--lime)}
+/* laptop + crane */
+.two{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:48px;align-items:center}
+.vis{width:100%;max-width:440px;margin:0 auto;display:block}
+.cpu{transform-origin:left center;transform-box:fill-box;transform:scaleX(.9);transition:transform 1.8s cubic-bezier(.3,.7,.2,1) .7s}
+.in .cpu{transform:scaleX(.06)}
+.punch{margin-top:18px;font:700 clamp(1.3rem,2.4vw,1.9rem) 'Space Grotesk',sans-serif;color:var(--lime-ink)}
+.zz{font:700 22px 'Space Grotesk',sans-serif;fill:var(--blue);opacity:0;animation:zz 3s ease-in-out infinite}
+.zz:nth-of-type(2){animation-delay:.6s}.zz:nth-of-type(3){animation-delay:1.2s}
+@keyframes zz{0%,100%{opacity:0}50%{opacity:.95}}
+.swing{transform-origin:190px 62px;animation:sw 5s ease-in-out infinite}
+@keyframes sw{0%,100%{transform:rotate(-1.5deg)}50%{transform:rotate(1.5deg)}}
+@media(prefers-reduced-motion:reduce){.zz{animation:none;opacity:.8}.swing{animation:none}.cpu{transition:none}}
+/* stats */
+.hero h1{font-size:clamp(2.2rem,5vw,4.2rem);line-height:1.05;font-weight:700;max-width:17ch;margin-bottom:10px}
 .stats{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:34px}
-.stat .n{font-family:'Space Grotesk',sans-serif;font-size:clamp(3rem,7vw,5.6rem);font-weight:700;line-height:1}
+.stat .n{font:700 clamp(3rem,7vw,5.6rem)/1 'Space Grotesk',sans-serif}
 .stat .n.accent{color:var(--lime)}
 .stat .t{margin-top:8px;color:#C5D6EA;font-size:1.1rem}
-.chips{display:flex;flex-wrap:wrap;gap:10px;margin-top:22px}
-.chips span{border:1px solid rgba(255,255,255,.35);border-radius:99px;padding:6px 16px;font-size:1rem;color:#E4EEFA}
-.chips b{color:var(--lime);font-family:'Space Grotesk',sans-serif}
-/* 2 */
-.split{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(0,1fr);gap:48px;align-items:center;margin-top:10px}
+/* buzz */
+.tiles{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:8px}
+.tile{border-left:4px solid var(--blue);background:var(--white);padding:14px 16px;font:700 1.45rem 'Space Grotesk',sans-serif}
+.tile span{display:block;font:400 1rem 'IBM Plex Sans',sans-serif;color:var(--muted);margin-top:2px}
+.tile:nth-child(2n){border-color:var(--lime)}
+/* savings */
+.panel{background:var(--paper);border:1px solid var(--line);padding:18px}
+.calc{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:32px;margin-top:6px;align-items:start}
+.field{margin-bottom:14px}
+.field .top{display:flex;justify-content:space-between;align-items:baseline;gap:12px}
+.field label{font-weight:600}
+.field .val{font:700 1.15rem 'Space Grotesk',sans-serif;white-space:nowrap}
+input[type=range]{width:100%;accent-color:var(--blue);margin:4px 0 0}
+.verdict{font:700 clamp(1.8rem,3.4vw,2.7rem)/1.1 'Space Grotesk',sans-serif}
+.verdict b{color:var(--lime-ink)}
+.bars{margin:16px 0 8px;display:grid;gap:10px}
+.lab{display:flex;justify-content:space-between;font-size:.92rem;margin-bottom:4px}
+.lab span:last-child{font-family:'Space Grotesk',sans-serif;font-weight:700}
+.track{height:26px;background:var(--idle);border-radius:4px;overflow:hidden}
+.fill{height:100%;width:0;transition:width .7s cubic-bezier(.2,.8,.2,1)}
+.fill.ded{background:var(--navy)}.fill.gp{background:var(--lime)}
+.out{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:14px}
+.out div{background:var(--white);border-left:4px solid var(--blue);padding:8px 12px;font:700 1.25rem 'Space Grotesk',sans-serif}
+.out span{display:block;font:400 .85rem 'IBM Plex Sans',sans-serif;color:var(--muted)}
+/* solution grid */
+.split{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(0,1fr);gap:48px;align-items:center;margin-top:6px}
 #weekGrid{display:grid;grid-template-columns:34px repeat(24,minmax(0,1fr));gap:3px;cursor:pointer}
 #weekGrid .dl{font-size:.72rem;color:var(--muted);align-self:center}
+#weekGrid .hl{font-size:.55rem;color:var(--muted);text-align:center;align-self:end}
 .c{aspect-ratio:1/1;background:var(--idle);border-radius:3px;transition:background .35s}
 .c.owner{background:var(--navy)}.c.gp{background:var(--lime)}
 .c.pc{animation:cellpop .55s cubic-bezier(.34,1.56,.64,1) both;animation-delay:var(--cd,0ms)}
 @keyframes cellpop{0%{transform:scale(.3)}100%{transform:scale(1)}}
 .legend{display:flex;flex-wrap:wrap;gap:8px 20px;margin-top:12px;font-size:.86rem;color:var(--muted)}
 .legend i{display:inline-block;width:12px;height:12px;border-radius:3px;margin-right:6px;vertical-align:-1px}
-.state{padding:14px 0 14px 18px;border-left:4px solid var(--line);opacity:.32;transition:opacity .5s,border-color .5s}
-.state.on{opacity:1}
-.state[data-s="1"].on{border-color:var(--navy)}
-.state[data-s="2"].on{border-color:var(--lime)}
-.state .big{font-family:'Space Grotesk',sans-serif;font-size:3rem;font-weight:700;line-height:1.05}
-.state .big small{font-family:'IBM Plex Sans',sans-serif;font-size:.95rem;font-weight:400;color:var(--muted);margin-left:8px}
-.rules3{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:22px}
-.rules3>div{border-left:4px solid var(--blue);padding:2px 0 2px 12px;font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:1.1rem}
-.rules3 span{display:block;font-family:'IBM Plex Sans',sans-serif;font-weight:400;color:var(--muted);font-size:.95rem}
-/* 3 */
-.bench{margin-top:10px}
-.brow{display:grid;grid-template-columns:12rem 1fr;gap:6px 22px;padding:14px 0;border-top:1px solid var(--line);align-items:baseline}
-.brow .nm{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:1.3rem}
-.brow .b{color:var(--muted);font-size:1.1rem}
-.brow.us{background:linear-gradient(90deg,#EAF6D9,transparent 85%)}
-.brow.us .b{color:var(--navy);font-weight:600}
-/* 4 */
-.panel{background:var(--paper);border:1px solid var(--line);padding:18px}
-.calc{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:32px;margin-top:10px;align-items:start}
-.field{margin-bottom:12px}
-.field .top{display:flex;justify-content:space-between;align-items:baseline;gap:12px}
-.field label{font-weight:600}
-.field .val{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:1.15rem;white-space:nowrap}
-input[type=range]{width:100%;accent-color:var(--blue);margin:4px 0 0}
-.verdict-line{font-family:'Space Grotesk',sans-serif;font-size:clamp(1.8rem,3.4vw,2.7rem);font-weight:700;line-height:1.1}
-.verdict-line.neg{color:var(--red)}
-.verdict-line b{color:var(--lime-ink)}
-.bars{margin:16px 0 8px;display:grid;gap:10px}
-.lab{display:flex;justify-content:space-between;font-size:.92rem;margin-bottom:4px}
-.lab span:last-child{font-family:'Space Grotesk',sans-serif;font-weight:700}
-.track{height:28px;background:var(--idle);border-radius:4px;overflow:hidden}
-.fill{height:100%;width:0;transition:width .7s cubic-bezier(.2,.8,.2,1)}
-.fill.ded{background:var(--navy)}.fill.gp{background:var(--lime)}
-.forgp{margin-top:14px;padding:10px 14px;background:var(--white);border-left:4px solid var(--blue);font-size:.95rem}
-.forgp b{font-family:'Space Grotesk',sans-serif}
-.forgp div+div{margin-top:4px}
-/* 5 */
-.fd{display:grid;grid-template-columns:1fr 1fr;gap:48px;margin-top:14px;align-items:start}
-.fd h3{font-size:1.2rem;margin-bottom:8px;color:var(--lime-ink)}
-.tier{display:flex;justify-content:space-between;align-items:baseline;padding:12px 0;border-top:1px solid var(--line);font-weight:600;font-size:1.15rem}
-.px{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:2rem;color:var(--blue)}
-.px small{font-size:.85rem;color:var(--muted);font-weight:500}
-.take{margin-top:12px;font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:1.2rem}
-.take span{color:var(--lime-ink)}
-.dist>div{padding:12px 0;border-top:1px solid var(--line);font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:1.25rem}
-.dist span{display:block;font-family:'IBM Plex Sans',sans-serif;font-weight:400;font-size:1rem;color:var(--muted)}
-/* 6 */
-.pilot{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:44px;margin-top:14px;align-items:center}
-.hyp{font-family:'Space Grotesk',sans-serif;font-size:clamp(1.6rem,3vw,2.4rem);font-weight:700;line-height:1.2}
-.hyp div{padding:6px 0 6px 16px;border-left:3px solid rgba(255,255,255,.35);margin-bottom:8px}
-.hyp b{color:var(--lime)}
-.tester{background:rgba(255,255,255,.08);padding:18px;border:1px solid rgba(255,255,255,.22)}
-.chk{display:inline-flex;gap:8px;align-items:center;cursor:pointer}
-.vd{font-family:'Space Grotesk',sans-serif;font-size:1.8rem;font-weight:700;margin-top:8px}
-.vd.pay{color:var(--lime)}.vd.stop{color:#FF9C86}.vd.mid{color:#9CC8F5}
-.ask{margin-top:26px;font-family:'Space Grotesk',sans-serif;font-size:clamp(1.4rem,2.8vw,2.1rem);font-weight:700;max-width:30ch}
+.state{padding:12px 0 12px 18px;border-left:4px solid var(--line);opacity:.32;transition:opacity .5s,border-color .5s}
+.state.on{opacity:1}.state[data-s="1"].on{border-color:var(--navy)}.state[data-s="2"].on{border-color:var(--lime)}
+.state .big{font:700 3rem/1.05 'Space Grotesk',sans-serif}
+.state .big small{font:400 .95rem 'IBM Plex Sans',sans-serif;color:var(--muted);margin-left:8px}
+.flow{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}
+.flow span{border:2px solid var(--blue);border-radius:99px;padding:6px 16px;font:700 1rem 'Space Grotesk',sans-serif}
+.flow span+span:before{content:"→";margin-right:10px;color:var(--blue)}
+/* pilot */
+.hyp{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin:8px 0 18px}
+.hyp div{border-left:3px solid rgba(255,255,255,.35);padding:4px 0 4px 16px;font:700 clamp(1.2rem,2.2vw,1.7rem)/1.2 'Space Grotesk',sans-serif}
+.hyp b{display:block;color:var(--lime);font-size:clamp(2.4rem,5vw,4rem);line-height:1}
+.ask{margin-top:22px;font:700 clamp(1.5rem,3vw,2.4rem)/1.15 'Space Grotesk',sans-serif;max-width:26ch}
 .ask span{color:var(--lime)}
-/* backups */
+/* backup */
 .bmc{display:grid;grid-template-columns:repeat(10,1fr);grid-template-areas:"kp kp ka ka vp vp cr cr cs cs" "kp kp kr kr vp vp ch ch cs cs" "co co co co co rs rs rs rs rs";gap:6px;margin-top:10px}
 .bmc>div{border:1px solid var(--line);background:#fff;padding:10px 12px;font-size:.9rem;color:var(--muted);line-height:1.35}
 .bmc b{display:block;font-family:'Space Grotesk',sans-serif;color:var(--navy);margin-bottom:2px}
-.bmc .vp{background:var(--navy);color:#D3E1F1;border-color:var(--navy)}
-.bmc .vp b{color:#fff}
+.bmc .vp{background:var(--navy);color:#D3E1F1;border-color:var(--navy)}.bmc .vp b{color:#fff}
 .bmc .rs{border:2px solid var(--lime)}
-.swot{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:12px}
-.swot>div{border:1px solid var(--line);background:var(--paper);padding:12px 16px}
-.swot h3{font-size:1.1rem;margin-bottom:4px}
-.swot .s h3{color:var(--lime-ink)}.swot .w h3{color:var(--red)}.swot .o h3{color:var(--blue)}.swot .th h3{color:var(--navy-2)}
-.swot ul{margin:0;padding-left:1.1em;color:var(--muted);font-size:1rem}
-@media(max-width:860px){.stats,.rules3,.split,.calc,.pilot,.fd,.swot{grid-template-columns:1fr}.brow{grid-template-columns:1fr}.bmc{grid-template-columns:1fr;grid-template-areas:none}.bmc>div{grid-area:auto!important}}
+.brow{display:grid;grid-template-columns:12rem 1fr;gap:6px 22px;padding:14px 0;border-top:1px solid var(--line);align-items:baseline}
+.brow .nm{font:700 1.3rem 'Space Grotesk',sans-serif}.brow .b{color:var(--muted);font-size:1.1rem}
+.brow.us{background:linear-gradient(90deg,#EAF6D9,transparent 85%)}.brow.us .b{color:var(--navy);font-weight:600}
+@media(max-width:860px){.two,.stats,.tiles,.calc,.split,.hyp,.out{grid-template-columns:1fr}.bmc{grid-template-columns:1fr;grid-template-areas:none}.bmc>div{grid-area:auto!important}.brow{grid-template-columns:1fr}.arrow{display:none}#thread span{padding:3px 6px;font-size:.6rem}}
 </style>
 </head>
 <body>
 <div id="deck">
+<div id="thread" class="off"></div>
 
-<!-- 1 Market fit -->
-<section class="slide dark hero active" id="s1"><div class="wrap">
-  <h1 class="reveal" data-pop><span>Health AI overpays for GPUs. Europe's GPUs sit idle.</span></h1>
+<!-- 0 Title -->
+<section class="slide dark active" id="s0"><div class="wrap t0">
+  <div class="lg pop" data-pop><img src="logo.png" alt="GreenPow" onload="this.parentNode.classList.add('ok')"><div class="ph"><i></i>GreenPow</div></div>
+  <h1 class="reveal" data-pop><span>Compute without <b>more megawatts</b></span></h1>
+  <p class="sub pop" data-pop style="--d:.5s">Idle GPUs, put to work for European medtech AI.</p>
+</div></section>
+
+<!-- 1 Audience: laptop -->
+<section class="slide white" id="s1"><div class="wrap two">
+  <div>
+    <h2 class="h2 reveal" data-pop><span>How busy is your laptop right now?</span></h2>
+    <p class="sub pop" data-pop style="--d:.4s">Be honest. Mostly waiting.</p>
+    <p class="punch pop" data-pop style="--d:.9s">You don't mind. It cost about €1,000.</p>
+  </div>
+  <svg class="vis pop" data-pop style="--d:.2s" viewBox="0 0 360 250" role="img" aria-label="Laptop with a nearly empty usage bar">
+    <rect x="50" y="10" width="260" height="165" rx="12" fill="#0B2A4A"/>
+    <rect x="62" y="22" width="236" height="141" rx="5" fill="#0D3C70"/>
+    <text x="80" y="62" fill="#C5D6EA" font-size="15" font-family="IBM Plex Sans">Processor use</text>
+    <rect x="80" y="76" width="200" height="24" rx="5" fill="#16508F"/>
+    <rect class="cpu" x="80" y="76" width="200" height="24" rx="5" fill="#8BD13F"/>
+    <text x="80" y="136" fill="#fff" font-size="22" font-family="Space Grotesk" font-weight="700">Idle most of the day</text>
+    <path d="M20 182h320l-22 28H42z" fill="#D3DCE6"/><rect x="150" y="182" width="60" height="6" rx="3" fill="#8499B0"/>
+  </svg>
+</div><div class="pg"></div></section>
+
+<!-- 2 Crane -->
+<section class="slide" id="s2"><div class="wrap two">
+  <svg class="vis pop" data-pop viewBox="0 0 420 310" role="img" aria-label="A tower crane standing idle">
+    <rect x="0" y="290" width="420" height="6" fill="#D3DCE6"/>
+    <rect x="130" y="276" width="120" height="16" fill="#0B2A4A"/>
+    <path d="M174 276V70h32v206M174 100l32 40M206 100l-32 40M174 150l32 40M206 150l-32 40M174 200l32 40M206 200l-32 40" stroke="#0B2A4A" stroke-width="5" fill="none"/>
+    <rect x="40" y="52" width="360" height="12" fill="#0D3C70"/>
+    <rect x="50" y="64" width="40" height="30" fill="#4A6078"/><rect x="170" y="38" width="40" height="22" rx="3" fill="#2F8CE8"/>
+    <path d="M174 52L190 14L206 52" stroke="#0B2A4A" stroke-width="4" fill="none"/>
+    <g class="swing"><line x1="340" y1="64" x2="340" y2="190" stroke="#0B2A4A" stroke-width="3"/><rect x="326" y="190" width="28" height="22" rx="4" fill="#8BD13F"/></g>
+    <text class="zz" x="362" y="150">z</text><text class="zz" x="376" y="128" font-size="28">Z</text><text class="zz" x="394" y="100">Z</text>
+  </svg>
+  <div>
+    <h2 class="h2 reveal" data-pop><span>Same story. Bigger bill.</span></h2>
+    <p class="sub pop" data-pop style="--d:.4s">A crane between projects: still on site, still paid for, not lifting.</p>
+    <p class="punch pop" data-pop style="--d:.9s">A GPU cluster is that crane.</p>
+  </div>
+</div><div class="pg"></div></section>
+
+<!-- 3 Stats -->
+<section class="slide dark hero" id="s3"><div class="wrap">
+  <h1 class="reveal" data-pop><span>Medtech AI overpays for GPUs. Europe's GPUs sit idle.</span></h1>
   <div class="stats">
     <div class="stat pop" data-pop style="--d:.2s"><div class="n accent">$1-6</div><div class="t">per GPU-hour on demand</div></div>
     <div class="stat pop" data-pop style="--d:.45s"><div class="n" data-count="86" data-suffix="%">86%</div><div class="t">of GPU owners run at half capacity or less</div></div>
-    <div class="stat pop" data-pop style="--d:.7s"><div class="n" data-count="27">27</div><div class="t">EU countries, one health data space</div></div>
+    <div class="stat pop" data-pop style="--d:.7s"><div class="n accent" data-count="56064" data-prefix="+">+56,064</div><div class="t">GPU-hours a year freed on one 32-GPU cluster</div></div>
   </div>
-  <div class="small" style="margin-top:14px">Sources: GreenPow, VentureBeat survey (July 2026), Regulation (EU) 2025/327.</div>
+  <div class="small" style="margin-top:14px">Sources: GreenPow, VentureBeat survey (July 2026). The 56,064 is our model: 60% to 80% busy, 32 GPUs.</div>
 </div><div class="pg"></div></section>
 
-<!-- 2 Solution -->
-<section class="slide white" id="s2"><div class="wrap">
-  <h2 class="h2 reveal" data-pop><span>Move what can move. Fill the empty hours.</span></h2>
-  <div class="split">
-    <div>
-      <div id="weekGrid" aria-label="One 32-GPU cluster over one week, hour by hour"></div>
-      <div class="legend">
-        <span><i style="background:var(--navy)"></i>Owner</span>
-        <span><i style="background:var(--lime)"></i>GreenPow jobs</span>
-        <span><i style="background:var(--idle)"></i>Idle</span>
-      </div>
-    </div>
-    <div>
-      <div class="state" data-s="1"><div class="big"><span class="u">60</span>%<small>busy</small></div></div>
-      <div class="state" data-s="2"><div class="big"><span class="u">80</span>%<small>busy</small></div><div class="big">+<span class="k">56,064</span><small>GPU-hours a year</small></div></div>
-    </div>
+<!-- 4 Market buzzwords -->
+<section class="slide" id="s4"><div class="wrap">
+  <h2 class="h2 reveal" data-pop><span>Medtech AI can't just rent anything.</span></h2>
+  <div class="tiles">
+    <div class="tile pop" data-pop style="--d:.1s">Data sovereignty<span>Patient data stays in its zone</span></div>
+    <div class="tile pop" data-pop style="--d:.25s">27 countries<span>One EU health data space</span></div>
+    <div class="tile pop" data-pop style="--d:.4s">Deadline-aware<span>Trial and model dates are fixed</span></div>
+    <div class="tile pop" data-pop style="--d:.55s">Carbon-aware<span>Run when energy is cleaner</span></div>
+    <div class="tile pop" data-pop style="--d:.7s">Zero new megawatts<span>Use what is already built</span></div>
+    <div class="tile pop" data-pop style="--d:.85s">Spare capacity<span>Idle hours become income</span></div>
   </div>
+  <div class="small" style="margin-top:12px">European Health Data Space: Regulation (EU) 2025/327.</div>
 </div><div class="pg"></div></section>
 
-<!-- 3 Competitors -->
-<section class="slide" id="s3"><div class="wrap">
-  <h2 class="h2 reveal" data-pop><span>Nobody sells a deadline across owners.</span></h2>
-  <div class="bench">
-    <div class="brow pop" data-pop style="--d:.1s"><div class="nm">Verda</div><div class="b">Sells GPUs</div></div>
-    <div class="brow pop" data-pop style="--d:.2s"><div class="nm">Emerald AI</div><div class="b">Matches load to the grid</div></div>
-    <div class="brow pop" data-pop style="--d:.3s"><div class="nm">Google</div><div class="b">Orchestrates only its own sites</div></div>
-    <div class="brow pop" data-pop style="--d:.4s"><div class="nm">HPC, LUMI</div><div class="b">Cheap for researchers. Our partners</div></div>
-    <div class="brow us pop" data-pop style="--d:.55s"><div class="nm">GreenPow</div><div class="b">Spare capacity, matched to deadlines</div></div>
-  </div>
-</div><div class="pg"></div></section>
-
-<!-- 4 Demo -->
-<section class="slide white" id="s4"><div class="wrap">
-  <h2 class="h2 reveal" data-pop><span>Who saves. Who earns.</span></h2>
+<!-- 5 Cost savings -->
+<section class="slide white" id="s5"><div class="wrap">
+  <h2 class="h2 reveal" data-pop><span>Cheaper. More power. Done by morning.</span></h2>
   <div class="calc" data-pop>
     <div class="panel">
       <div class="field"><div class="top"><label for="gpuH">Startup GPU-hours a month</label><span class="val" id="gpuHv"></span></div><input type="range" id="gpuH" min="500" max="10000" step="100" value="3000"></div>
       <div class="field"><div class="top"><label for="wait">Share that can wait</label><span class="val" id="waitv"></span></div><input type="range" id="wait" min="0" max="100" step="5" value="70"></div>
       <div class="field"><div class="top"><label for="pNow">On-demand price</label><span class="val" id="pNowv"></span></div><input type="range" id="pNow" min="1" max="6" step="0.25" value="4"></div>
-      <div class="field"><div class="top"><label for="pTon">Overnight price</label><span class="val" id="pTonv"></span></div><input type="range" id="pTon" min="1" max="4" step="0.25" value="2"></div>
-      <div class="field" style="margin-bottom:0"><div class="top"><label for="nGpu">Owner's GPUs</label><span class="val" id="nGpuv"></span></div><input type="range" id="nGpu" min="8" max="128" step="8" value="32"></div>
+      <div class="field" style="margin-bottom:0"><div class="top"><label for="pTon">Overnight price</label><span class="val" id="pTonv"></span></div><input type="range" id="pTon" min="1" max="4" step="0.25" value="2"></div>
     </div>
     <div class="panel">
-      <div class="verdict-line" id="headline"></div>
+      <div class="verdict" id="headline"></div>
       <div class="bars">
         <div><div class="lab"><span>On demand</span><span id="dedTxt"></span></div><div class="track"><div class="fill ded" id="dedBar"></div></div></div>
         <div><div class="lab"><span>With GreenPow</span><span id="gpTxt"></span></div><div class="track"><div class="fill gp" id="gpBar"></div></div></div>
       </div>
-      <div class="forgp"><div id="forOwner"></div><div id="forGp"></div></div>
-      <div class="small" style="margin-top:8px">Assumes 40% idle, half resold, 20% take rate.</div>
-    </div>
-  </div>
-</div><div class="pg"></div></section>
-
-<!-- 5 Finance + distribution -->
-<section class="slide" id="s5"><div class="wrap">
-  <h2 class="h2 reveal" data-pop><span>Priced by wait time. Sold through Europe's health-tech hubs.</span></h2>
-  <div class="fd">
-    <div class="pop" data-pop style="--d:.1s">
-      <h3>Finance</h3>
-      <div class="tier"><span>Now</span><span class="px">$4<small> /h</small></span></div>
-      <div class="tier"><span>Overnight</span><span class="px">$2<small> /h</small></span></div>
-      <div class="tier"><span>This week</span><span class="px">&lt;$2<small> /h</small></span></div>
-      <div class="take">GreenPow keeps <span>20%</span></div>
-    </div>
-    <div class="pop" data-pop style="--d:.3s">
-      <h3>Distribution</h3>
-      <div class="dist">
-        <div>Who pays<span>Buyer: ML lead. User: ML engineers.</span></div>
-        <div>Channel<span>Health-tech clusters, accelerators</span></div>
-        <div>Partners<span>HPC centres, university hospitals</span></div>
+      <div class="out">
+        <div id="oCost">-<span>cost</span></div>
+        <div>+56,064<span>GPU-hours a year, per 32-GPU cluster</span></div>
+        <div>By 06:00<span>overnight jobs finish</span></div>
       </div>
+      <div class="small" style="margin-top:10px" id="forGp"></div>
     </div>
   </div>
 </div><div class="pg"></div></section>
 
-<!-- 6 Pilot -->
-<section class="slide dark" id="s6"><div class="wrap">
-  <h2 class="h2 reveal" data-pop><span>First pilot: prove it works.</span></h2>
-  <div class="pilot">
-    <div class="hyp" style="display:grid;gap:8px;">
-      <div class="pop" data-pop style="--d:.1s"><b>60%</b> can wait</div>
-      <div class="pop" data-pop style="--d:.25s"><b>30%</b> cheaper</div>
-      <div class="pop" data-pop style="--d:.4s"><b>0</b> rule violations</div>
+<!-- 6 Solution -->
+<section class="slide" id="s6"><div class="wrap">
+  <h2 class="h2 reveal" data-pop><span>GreenPow: move what can move. Fill the empty hours.</span></h2>
+  <div class="split">
+    <div>
+      <div id="weekGrid" aria-label="One 32-GPU cluster over one week, Monday to Sunday, hours 00 to 23"></div>
+      <div class="legend"><span><i style="background:var(--navy)"></i>Owner</span><span><i style="background:var(--lime)"></i>GreenPow jobs</span><span><i style="background:var(--idle)"></i>Idle</span></div>
     </div>
-    <div class="tester pop" data-pop style="--d:.3s">
-      <div style="font-family:'Space Grotesk',sans-serif;font-size:1.2rem;font-weight:700;margin-bottom:10px">If the pilot shows this, we decide:</div>
-      <div class="field"><div class="top"><label for="meas">Measured savings</label><span class="val" id="measv"></span></div><input type="range" id="meas" min="0" max="60" step="1" value="35"></div>
-      <div class="field"><div class="top"><label for="dl">Deadlines met</label><span class="val" id="dlv"></span></div><input type="range" id="dl" min="80" max="100" step="1" value="97"></div>
-      <label class="chk"><input type="checkbox" id="viol"> A dataset left its zone</label>
-      <div class="vd" id="vd"></div>
+    <div>
+      <div class="state" data-s="1"><div class="big"><span class="u">60</span>%<small>busy</small></div></div>
+      <div class="state" data-s="2"><div class="big"><span class="u">80</span>%<small>busy</small></div></div>
     </div>
   </div>
-  <div class="small pop" data-pop style="--d:.2s;margin-top:18px">Data needed: startup GPU-hours and deadlines, cluster idle hours.</div>
-  <div class="ask pop" data-pop style="--d:.4s">GreenPow turns <span>idle GPU-hours</span> into useful work.</div>
+  <div class="flow pop" data-pop style="--d:.6s"><span>Signals</span><span>Guardrails</span><span>Orchestration</span></div>
+  <div class="small" style="margin-top:10px">Buyer: ML lead. Owner earns from idle hours, GreenPow keeps 20%. Sold through health-tech hubs.</div>
+</div><div class="pg"></div></section>
+
+<!-- 7 Pilot + ask -->
+<section class="slide dark" id="s7"><div class="wrap">
+  <h2 class="h2 reveal" data-pop><span>First pilot: prove it on real GPU bills.</span></h2>
+  <div class="hyp">
+    <div class="pop" data-pop style="--d:.1s"><b>60%</b>of work can wait</div>
+    <div class="pop" data-pop style="--d:.25s"><b>30%</b>cheaper</div>
+    <div class="pop" data-pop style="--d:.4s"><b>0</b>data-rule violations</div>
+  </div>
+  <div class="small pop" data-pop style="--d:.3s">Pass: 30% saved and 95% of deadlines met. Below 15%: stop.</div>
+  <div class="ask pop" data-pop style="--d:.5s">GreenPow turns <span>idle GPU-hours</span> into medtech AI.</div>
 </div><div class="pg"></div></section>
 
 <!-- Backup: canvas -->
-<section class="slide white" id="s7"><div class="wrap">
+<section class="slide white" id="s8"><div class="wrap">
   <h2 class="h2" style="font-size:1.6rem;margin-bottom:0">Backup: business model canvas</h2>
   <div class="bmc">
     <div style="grid-area:kp"><b>Partners</b>National HPC centres, LUMI. University hospitals. EU GPU clouds. Health-tech clusters.</div>
@@ -244,24 +264,25 @@ input[type=range]{width:100%;accent-color:var(--blue);margin:4px 0 0}
     <div class="vp" style="grid-area:vp"><b>Value</b>Startups: cheaper GPUs when work can wait, data kept in zone. Owners: income from idle hours.</div>
     <div style="grid-area:cr"><b>Relationships</b>Guided onboarding. Self-service console.</div>
     <div style="grid-area:ch"><b>Channels</b>Clusters, accelerators, direct to ML leads.</div>
-    <div style="grid-area:cs"><b>Segments</b>Health AI startups. GPU owners. Research groups.</div>
+    <div style="grid-area:cs"><b>Segments</b>Medtech AI startups. GPU owners. Research groups.</div>
     <div style="grid-area:co"><b>Costs</b>GPU hours from partners. Integration. Certification. Sales.</div>
     <div class="rs" style="grid-area:rs"><b>Revenue</b>Per GPU-hour by urgency. 20% take rate. Compliance add-on.</div>
   </div>
   <div class="small" style="margin-top:8px">Assumptions to test: $1-6 per GPU-hour (GreenPow CEO), 40% idle share, 50% resold, 20% take rate.</div>
 </div><div class="pg"></div></section>
 
-<!-- Backup: SWOT -->
-<section class="slide" id="s8"><div class="wrap">
-  <h2 class="h2" style="font-size:1.6rem;margin-bottom:0">Backup: SWOT</h2>
-  <div class="swot">
-    <div class="s"><h3>Strengths</h3><ul><li>Engine already built</li><li>Plugs into existing infrastructure</li><li>No hardware to buy</li></ul></div>
-    <div class="w"><h3>Weaknesses</h3><ul><li>Depends on partners' idle hours</li><li>Thin margin per hour, so volume matters</li><li>Certifications to confirm</li></ul></div>
-    <div class="o"><h3>Opportunities</h3><ul><li>EU health data space</li><li>Sovereignty concerns about US clouds</li><li>Same model for other regulated fields</li></ul></div>
-    <div class="th"><h3>Threats</h3><ul><li>Subsidised HPC for researchers</li><li>Owners may refuse external jobs</li><li>Marketplaces could add scheduling</li></ul></div>
-  </div>
+<!-- Backup: competitors -->
+<section class="slide" id="s9"><div class="wrap">
+  <h2 class="h2" style="font-size:1.6rem">Backup: nobody sells a deadline across owners</h2>
+  <div class="brow"><div class="nm">Verda</div><div class="b">Sells GPUs</div></div>
+  <div class="brow"><div class="nm">Emerald AI</div><div class="b">Matches load to the grid</div></div>
+  <div class="brow"><div class="nm">Google</div><div class="b">Orchestrates only its own sites</div></div>
+  <div class="brow"><div class="nm">HPC, LUMI</div><div class="b">Cheap for researchers. Our partners</div></div>
+  <div class="brow us"><div class="nm">GreenPow</div><div class="b">Spare capacity, matched to deadlines</div></div>
 </div><div class="pg"></div></section>
 
+<button class="arrow" id="prev" aria-label="Previous slide">&#8592;</button>
+<button class="arrow" id="next" aria-label="Next slide">&#8594;</button>
 <div id="dots" role="tablist" aria-label="Slides"></div>
 </div>
 
@@ -272,21 +293,27 @@ input[type=range]{width:100%;accent-color:var(--blue);margin:4px 0 0}
   function $$(s,r){return Array.prototype.slice.call((r||document).querySelectorAll(s))}
   function money(n){return '$'+Math.round(n).toLocaleString('en-US')}
   function num(n){return Math.round(n).toLocaleString('en-US')}
-  var slides=$$('.slide'),N=slides.length,idx=0,MAIN=6;
+  var slides=$$('.slide'),N=slides.length,idx=0,MAIN=7;
 
   function fitAll(){slides.forEach(function(sec){var w=$('.wrap',sec);if(!w)return;w.style.zoom=1;var cs=getComputedStyle(sec);var avail=sec.clientHeight-parseFloat(cs.paddingTop)-parseFloat(cs.paddingBottom);var need=w.scrollHeight;if(need>avail)w.style.zoom=Math.max(.45,avail/need*.98)})}
   window.addEventListener('resize',fitAll);
   if(document.fonts&&document.fonts.ready)document.fonts.ready.then(fitAll);
   fitAll();setTimeout(fitAll,500);setTimeout(fitAll,1500);
-  slides.forEach(function(s,i){$('.pg',s).textContent=i<MAIN?(i+1)+' / '+MAIN:'Backup'});
+  slides.forEach(function(s,i){var p=$('.pg',s);if(p)p.textContent=i===0?'':i<=MAIN?i+' / '+MAIN:'Backup'});
+
+  /* red thread */
+  var TH=['You','Crane','Numbers','Market','Savings','Solution','Pilot'],th=$('#thread');
+  th.innerHTML=TH.map(function(t){return '<span>'+t+'</span>'}).join('');
+  function setThread(){th.classList.toggle('off',idx===0||idx>MAIN);$$('span',th).forEach(function(s,i){s.className=i+1===idx?'on':(i+1<idx?'done':'')})}
 
   function fmt(el,v){return (el.getAttribute('data-prefix')||'')+Math.round(v).toLocaleString('en-US')+(el.getAttribute('data-suffix')||'')}
   function runCount(el){var to=parseFloat(el.getAttribute('data-count'));if(REDUCED){el.textContent=fmt(el,to);return}el.textContent=fmt(el,0);var t0=performance.now();(function tick(t){var p=Math.min((t-t0)/1300,1),e=1-Math.pow(1-p,3);el.textContent=fmt(el,to*e);if(p<1)requestAnimationFrame(tick)})(t0)}
 
   /* week grid */
-  var DAYS=['Mon','Tue','Wed','Thu','Fri','Sat','Sun'],grid=$('#weekGrid'),cells=[];
-  DAYS.forEach(function(d,di){var l=document.createElement('div');l.className='dl';l.textContent=d;l.style.gridColumn='1';l.style.gridRow=String(di+2);grid.appendChild(l);cells[di]=[];for(var h=0;h<24;h++){var c=document.createElement('div');c.className='c';c.style.gridColumn=String(h+2);c.style.gridRow=String(di+2);grid.appendChild(c);cells[di][h]=c}});
-  var SETS={1:[],2:[]},h,d;
+  var DAYS=['Mon','Tue','Wed','Thu','Fri','Sat','Sun'],grid=$('#weekGrid'),cells=[],h,d;
+  for(h=0;h<24;h++){var hr=document.createElement('div');hr.className='hl';hr.textContent=String(h).padStart(2,'0');hr.style.gridColumn=String(h+2);hr.style.gridRow='1';grid.appendChild(hr)}
+  DAYS.forEach(function(n,di){var l=document.createElement('div');l.className='dl';l.textContent=n;l.style.gridColumn='1';l.style.gridRow=String(di+2);grid.appendChild(l);cells[di]=[];for(var k=0;k<24;k++){var c=document.createElement('div');c.className='c';c.style.gridColumn=String(k+2);c.style.gridRow=String(di+2);grid.appendChild(c);cells[di][k]=c}});
+  var SETS={1:[],2:[]};
   for(d=0;d<5;d++)for(h=7;h<=22;h++)SETS[1].push([d,h]);
   for(h=8;h<=18;h++)SETS[1].push([5,h]);
   for(h=10;h<=19;h++)SETS[1].push([6,h]);
@@ -294,64 +321,51 @@ input[type=range]{width:100%;accent-color:var(--blue);margin:4px 0 0}
   for(h=0;h<=2;h++)SETS[2].push([5,h]);
   var CLS={1:'owner',2:'gp'},timers=[];
   function tween(el,from,to,dur){if(REDUCED){el.textContent=num(to);return}var t0=performance.now();(function tick(t){var p=Math.min((t-t0)/dur,1),e=1-Math.pow(1-p,3);el.textContent=num(from+(to-from)*e);if(p<1)requestAnimationFrame(tick)})(t0)}
-  function resetGrid(){timers.forEach(clearTimeout);timers=[];$$('.c',grid).forEach(function(c){c.className='c';c.style.removeProperty('--cd')});$$('.state').forEach(function(s){s.classList.remove('on')});$('.state[data-s="1"] .u').textContent='60';$('.state[data-s="2"] .u').textContent='80';$('.state[data-s="2"] .k').textContent='56,064'}
-  function stage(n){SETS[n].forEach(function(a){var c=cells[a[0]][a[1]];c.classList.add(CLS[n],'pc');c.style.setProperty('--cd',(a[1]*22+a[0]*30)+'ms')});var s=$('.state[data-s="'+n+'"]');s.classList.add('on');if(n===1)tween($('.u',s),0,60,900);if(n===2){tween($('.u',s),60,80,900);tween($('.k',s),0,56064,1100)}}
-  function runGrid(){resetGrid();timers.push(setTimeout(function(){stage(1)},200));timers.push(setTimeout(function(){stage(2)},2000))}
+  function resetGrid(){timers.forEach(clearTimeout);timers=[];$$('.c',grid).forEach(function(c){c.className='c';c.style.removeProperty('--cd')});$$('.state').forEach(function(s){s.classList.remove('on')});$('.state[data-s="1"] .u').textContent='60';$('.state[data-s="2"] .u').textContent='80'}
+  function stage(n){SETS[n].forEach(function(a){var c=cells[a[0]][a[1]];c.classList.add(CLS[n],'pc');c.style.setProperty('--cd',(a[1]*22+a[0]*30)+'ms')});var s=$('.state[data-s="'+n+'"]');s.classList.add('on');if(n===1)tween($('.u',s),0,60,900);if(n===2)tween($('.u',s),60,80,900)}
+  function runGrid(){resetGrid();timers.push(setTimeout(function(){stage(1)},300));timers.push(setTimeout(function(){stage(2)},2000))}
   resetGrid();grid.addEventListener('click',runGrid);
 
-  /* calculator */
-  var inp={};['gpuH','wait','pNow','pTon','nGpu'].forEach(function(i){inp[i]=$('#'+i);inp[i].addEventListener('input',calc)});
+  /* savings */
+  var inp={};['gpuH','wait','pNow','pTon'].forEach(function(i){inp[i]=$('#'+i);inp[i].addEventListener('input',calc)});
   var calcLive=false;
   function calc(){
-    var H=+inp.gpuH.value,W=+inp.wait.value/100,NOW=+inp.pNow.value,TON=+inp.pTon.value,G=+inp.nGpu.value;
-    $('#gpuHv').textContent=num(H)+' h';$('#waitv').textContent=Math.round(W*100)+'%';$('#pNowv').textContent='$'+NOW.toFixed(2);$('#pTonv').textContent='$'+TON.toFixed(2);$('#nGpuv').textContent=G;
-    var today=H*NOW,withGp=H*(1-W)*NOW+H*W*TON,saveM=today-withGp,pct=today?saveM/today*100:0,hl=$('#headline');
-    if(saveM>=0){hl.className='verdict-line';hl.innerHTML='Startup saves <b>'+money(saveM*12)+'</b> a year ('+Math.round(pct)+'%)'}
-    else{hl.className='verdict-line neg';hl.innerHTML='Startup pays '+money(-saveM*12)+' more a year'}
-    $('#dedTxt').textContent=money(today)+' / month';$('#gpTxt').textContent=money(withGp)+' / month';
-    var mx=Math.max(today,withGp)||1;
-    $('#dedBar').style.width=(calcLive?today/mx*100:0)+'%';$('#gpBar').style.width=(calcLive?withGp/mx*100:0)+'%';
-    var resoldH=G*8760*.4*.5,owner=resoldH*TON*.8,marginYr=H*W*12*TON*.2;
-    $('#forOwner').innerHTML='<b>Owner earns</b> about '+money(owner)+' a year from idle hours.';
-    $('#forGp').innerHTML='<b>GreenPow keeps</b> 20%: '+money(marginYr)+' a year per startup.';
+    var H=+inp.gpuH.value,W=+inp.wait.value/100,NOW=+inp.pNow.value,TON=+inp.pTon.value;
+    $('#gpuHv').textContent=num(H)+' h';$('#waitv').textContent=Math.round(W*100)+'%';$('#pNowv').textContent='$'+NOW.toFixed(2);$('#pTonv').textContent='$'+TON.toFixed(2);
+    var today=H*NOW,gp=H*(1-W)*NOW+H*W*TON,save=today-gp,pct=today?save/today*100:0,hl=$('#headline');
+    if(save>=0){hl.style.color='';hl.innerHTML='Startup saves <b>'+money(save*12)+'</b> a year';$('#oCost').innerHTML=Math.round(pct)+'%<span>cheaper than on demand</span>'}
+    else{hl.style.color='var(--red)';hl.textContent='Startup pays '+money(-save*12)+' more a year';$('#oCost').innerHTML='0%<span>no saving at these prices</span>'}
+    $('#dedTxt').textContent=money(today)+' / month';$('#gpTxt').textContent=money(gp)+' / month';
+    var mx=Math.max(today,gp)||1;
+    $('#dedBar').style.width=(calcLive?today/mx*100:0)+'%';$('#gpBar').style.width=(calcLive?gp/mx*100:0)+'%';
+    $('#forGp').textContent='Owner earns about '+money(32*8760*.4*.5*TON*.8)+' a year from idle hours. GreenPow keeps 20%: '+money(H*W*12*TON*.2)+' a year per startup. Assumes 40% idle, half resold.';
   }
   calc();
 
-  /* pilot verdict */
-  function verdict(){
-    var m=+$('#meas').value,dl=+$('#dl').value,v=$('#viol').checked,el=$('#vd');
-    $('#measv').textContent=m+'%';$('#dlv').textContent=dl+'%';
-    if(v){el.className='vd stop';el.textContent='Stop: data left its zone'}
-    else if(m>=30&&dl>=95){el.className='vd pay';el.textContent='Pay, and add a second startup'}
-    else if(m<15){el.className='vd stop';el.textContent='Stop and rethink'}
-    else{el.className='vd mid';el.textContent='Keep testing'}
-  }
-  ['meas','dl'].forEach(function(i){$('#'+i).addEventListener('input',verdict)});$('#viol').addEventListener('change',verdict);verdict();
-  $$('input').forEach(function(i){i.addEventListener(i.type==='range'?'pointerup':'change',function(){i.blur()})});
-
-  /* navigation */
+  /* navigation: arrows only */
   var dots=$('#dots');
   slides.forEach(function(s,i){var b=document.createElement('button');b.type='button';b.setAttribute('aria-label','Slide '+(i+1));b.addEventListener('click',function(){show(i);b.blur()});dots.appendChild(b)});
-  function setDots(){$$('#dots button').forEach(function(b,i){b.classList.toggle('on',i===idx)})}
-  function enter(i){var s=slides[i];$$('[data-pop]',s).forEach(function(el){el.classList.remove('in')});void s.offsetWidth;$$('[data-pop]',s).forEach(function(el){el.classList.add('in')});$$('[data-count]',s).forEach(runCount);if(s.id==='s2')runGrid();if(s.id==='s4'){calcLive=true;setTimeout(calc,350)}}
-  function leave(i){var s=slides[i];$$('[data-pop]',s).forEach(function(el){el.classList.remove('in')});if(s.id==='s2')resetGrid();if(s.id==='s4'){calcLive=false;calc()}}
-  function show(n){n=Math.max(0,Math.min(N-1,n));if(n===idx)return;var old=idx;idx=n;slides[old].classList.remove('active');slides[n].classList.add('active');setDots();setTimeout(function(){if(idx!==old)leave(old)},480);enter(n)}
+  function setDots(){$$('#dots button').forEach(function(b,i){b.classList.toggle('on',i===idx)});$('#prev').style.visibility=idx===0?'hidden':'visible';$('#next').style.visibility=idx===N-1?'hidden':'visible'}
+  function enter(i){var s=slides[i];$$('[data-pop]',s).forEach(function(el){el.classList.remove('in')});void s.offsetWidth;$$('[data-pop]',s).forEach(function(el){el.classList.add('in')});$$('[data-count]',s).forEach(runCount);if(s.id==='s6')runGrid();if(s.id==='s5'){calcLive=true;setTimeout(calc,350)}}
+  function leave(i){var s=slides[i];$$('[data-pop]',s).forEach(function(el){el.classList.remove('in')});if(s.id==='s6')resetGrid();if(s.id==='s5'){calcLive=false;calc()}}
+  function show(n){n=Math.max(0,Math.min(N-1,n));if(n===idx)return;var old=idx;idx=n;slides[old].classList.remove('active');slides[n].classList.add('active');setDots();setThread();setTimeout(function(){if(idx!==old)leave(old)},480);enter(n)}
   function go(dir){show(idx+dir)}
+  $('#prev').addEventListener('click',function(){go(-1);this.blur()});
+  $('#next').addEventListener('click',function(){go(1);this.blur()});
   document.addEventListener('keydown',function(e){
     var tag=e.target&&e.target.tagName;
     if(/^(INPUT|TEXTAREA|SELECT)$/.test(tag)||e.metaKey||e.ctrlKey||e.altKey)return;
     var k=e.key;if(k===' '&&tag==='BUTTON')return;
-    if(k==='ArrowRight'||k==='ArrowDown'||k==='PageDown'||k===' '){e.preventDefault();go(1)}
-    else if(k==='ArrowLeft'||k==='ArrowUp'||k==='PageUp'){e.preventDefault();go(-1)}
+    if(k==='ArrowRight'||k==='PageDown'||k===' '){e.preventDefault();go(1)}
+    else if(k==='ArrowLeft'||k==='PageUp'){e.preventDefault();go(-1)}
     else if(k==='Home'){e.preventDefault();show(0)}
     else if(k==='End'){e.preventDefault();show(N-1)}
   });
-  var wLock=false,wTimer=null;
-  document.addEventListener('wheel',function(e){if(e.ctrlKey)return;var d=Math.abs(e.deltaY)>=Math.abs(e.deltaX)?e.deltaY:e.deltaX;if(Math.abs(d)<4)return;e.preventDefault();if(!wLock){wLock=true;go(d>0?1:-1)}clearTimeout(wTimer);wTimer=setTimeout(function(){wLock=false},240)},{passive:false});
-  var ty=null;
-  document.addEventListener('touchstart',function(e){ty=e.touches[0].clientY},{passive:true});
-  document.addEventListener('touchend',function(e){if(ty===null)return;var dy=ty-e.changedTouches[0].clientY;ty=null;if(Math.abs(dy)>50)go(dy>0?1:-1)},{passive:true});
-  setDots();setTimeout(function(){enter(0)},150);
+  var tx=null;
+  document.addEventListener('touchstart',function(e){tx=e.touches[0].clientX},{passive:true});
+  document.addEventListener('touchend',function(e){if(tx===null)return;var dx=tx-e.changedTouches[0].clientX;tx=null;if(Math.abs(dx)>60)go(dx>0?1:-1)},{passive:true});
+  $$('input').forEach(function(i){i.addEventListener('pointerup',function(){i.blur()})});
+  setDots();setThread();setTimeout(function(){enter(0)},200);
 })();
 </script>
 </body>
