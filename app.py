@@ -8,6 +8,7 @@ mouse wheel or swipe also work, and the dots at the bottom jump to a slide.
 All text, numbers and design live in page.html.
 """
 
+import base64
 import pathlib
 
 import streamlit as st
@@ -34,6 +35,9 @@ iframe { position: fixed !important; top: 0; left: 0; width: 100vw !important; h
     unsafe_allow_html=True,
 )
 
-page = (pathlib.Path(__file__).parent / "page.html").read_text(encoding="utf-8")
+project_dir = pathlib.Path(__file__).parent
+page = (project_dir / "page.html").read_text(encoding="utf-8")
+logo = base64.b64encode((project_dir / "logo.png").read_bytes()).decode("ascii")
+page = page.replace('src="logo.png"', f'src="data:image/png;base64,{logo}"')
 
 components.html(page, height=600, scrolling=False)
