@@ -215,14 +215,15 @@ input[type=range]{width:100%;accent-color:var(--blue);margin:4px 0 0}
 
 <!-- 6 Pilot -->
 <section class="slide dark" id="s6"><div class="wrap">
-  <h2 class="h2 reveal" data-pop><span>Pilot: one startup, one cluster.</span></h2>
+  <h2 class="h2 reveal" data-pop><span>First pilot: prove it works.</span></h2>
   <div class="pilot">
-    <div class="hyp">
+    <div class="hyp" style="display:grid;gap:8px;">
       <div class="pop" data-pop style="--d:.1s"><b>60%</b> can wait</div>
       <div class="pop" data-pop style="--d:.25s"><b>30%</b> cheaper</div>
       <div class="pop" data-pop style="--d:.4s"><b>0</b> rule violations</div>
     </div>
     <div class="tester pop" data-pop style="--d:.3s">
+      <div style="font-family:'Space Grotesk',sans-serif;font-size:1.2rem;font-weight:700;margin-bottom:10px">If the pilot shows this, we decide:</div>
       <div class="field"><div class="top"><label for="meas">Measured savings</label><span class="val" id="measv"></span></div><input type="range" id="meas" min="0" max="60" step="1" value="35"></div>
       <div class="field"><div class="top"><label for="dl">Deadlines met</label><span class="val" id="dlv"></span></div><input type="range" id="dl" min="80" max="100" step="1" value="97"></div>
       <label class="chk"><input type="checkbox" id="viol"> A dataset left its zone</label>
