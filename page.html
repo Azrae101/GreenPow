@@ -26,8 +26,6 @@ p{margin:0}
 #dots{position:absolute;left:50%;bottom:12px;transform:translateX(-50%);display:flex;gap:9px;z-index:10}
 #dots button{width:10px;height:10px;border-radius:50%;border:0;padding:0;background:#8499B0;opacity:.55;cursor:pointer;transition:all .25s}
 #dots button.on{background:var(--blue);opacity:1;transform:scale(1.35)}
-.arrow{position:absolute;top:50%;z-index:10;width:46px;height:46px;margin-top:-23px;border-radius:50%;border:1px solid rgba(132,153,176,.55);background:rgba(255,255,255,.75);color:var(--navy);font-size:1.4rem;cursor:pointer;display:grid;place-items:center;opacity:.55;transition:opacity .2s}
-.arrow:hover{opacity:1}#prev{left:12px}#next{right:12px}
 #thread{position:absolute;top:16px;left:50%;transform:translateX(-50%);display:flex;gap:6px;z-index:10;transition:opacity .4s}
 #thread.off{opacity:0}
 #thread span{font:700 .72rem 'Space Grotesk',sans-serif;letter-spacing:.06em;text-transform:uppercase;padding:4px 10px;border-radius:99px;background:rgba(132,153,176,.22);color:#6F849B;transition:all .3s}
@@ -91,8 +89,8 @@ input[type=range]{width:100%;accent-color:var(--blue);margin:4px 0 0}
 .legend i{display:inline-block;width:12px;height:12px;border-radius:3px;margin-right:6px;vertical-align:-1px}
 .state{padding:12px 0 12px 18px;border-left:4px solid var(--line);opacity:.32;transition:opacity .5s,border-color .5s}
 .state.on{opacity:1}.state[data-s="1"].on{border-color:var(--navy)}.state[data-s="2"].on{border-color:var(--lime)}
-.state .big{font:700 3rem/1.05 'Space Grotesk',sans-serif}
-.state .big small{font:400 .95rem 'IBM Plex Sans',sans-serif;color:var(--muted);margin-left:8px}
+.state .big{font:700 1.55rem/1.15 'Space Grotesk',sans-serif}
+.state .big small{display:block;font:400 .95rem 'IBM Plex Sans',sans-serif;color:var(--muted);margin-top:4px}
 .flow{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}
 .flow span{border:2px solid var(--blue);border-radius:99px;padding:6px 16px;font:700 1rem 'Space Grotesk',sans-serif}
 .flow span+span:before{content:"→";margin-right:10px;color:var(--blue)}
@@ -111,7 +109,7 @@ input[type=range]{width:100%;accent-color:var(--blue);margin:4px 0 0}
 .brow{display:grid;grid-template-columns:12rem 1fr;gap:6px 22px;padding:14px 0;border-top:1px solid var(--line);align-items:baseline}
 .brow .nm{font:700 1.3rem 'Space Grotesk',sans-serif}.brow .b{color:var(--muted);font-size:1.1rem}
 .brow.us{background:linear-gradient(90deg,#EAF6D9,transparent 85%)}.brow.us .b{color:var(--navy);font-weight:600}
-@media(max-width:860px){.stats,.tiles,.calc,.split,.hyp,.out{grid-template-columns:1fr}.bmc{grid-template-columns:1fr;grid-template-areas:none}.bmc>div{grid-area:auto!important}.brow{grid-template-columns:1fr}.arrow{display:none}#thread span{padding:3px 6px;font-size:.6rem}}
+@media(max-width:860px){.stats,.tiles,.calc,.split,.hyp,.out{grid-template-columns:1fr}.bmc{grid-template-columns:1fr;grid-template-areas:none}.bmc>div{grid-area:auto!important}.brow{grid-template-columns:1fr}#thread span{padding:3px 6px;font-size:.6rem}}
 </style>
 </head>
 <body>
@@ -127,13 +125,13 @@ input[type=range]{width:100%;accent-color:var(--blue);margin:4px 0 0}
 
 <!-- 1 Stats -->
 <section class="slide dark hero" id="s3"><div class="wrap">
-  <h1 class="reveal" data-pop><span>Medtech AI overpays for GPUs. Europe's GPUs sit idle.</span></h1>
+  <h1 class="reveal" data-pop><span>A focused market with a measurable savings case.</span></h1>
   <div class="stats">
-    <div class="stat pop" data-pop style="--d:.2s"><div class="n accent">$1-6</div><div class="t">per GPU-hour on demand</div></div>
-    <div class="stat pop" data-pop style="--d:.45s"><div class="n" data-count="86" data-suffix="%">86%</div><div class="t">of GPU owners run at half capacity or less</div></div>
-    <div class="stat pop" data-pop style="--d:.7s"><div class="n accent" data-count="56064" data-prefix="+">+56,064</div><div class="t">GPU-hours a year freed on one 32-GPU cluster</div></div>
+    <div class="stat pop" data-pop style="--d:.2s"><div class="n accent" data-count="25">25</div><div class="t">Low case · $1M average GPU spend · $25M total</div></div>
+    <div class="stat pop" data-pop style="--d:.45s"><div class="n" data-count="60">60</div><div class="t">Base case · $2M average GPU spend · $120M total</div></div>
+    <div class="stat pop" data-pop style="--d:.7s"><div class="n accent" data-count="120">120</div><div class="t">High case · $3M average GPU spend · $360M total</div></div>
   </div>
-  <div class="small" style="margin-top:14px">Sources: GreenPow, VentureBeat survey (July 2026). The 56,064 is our model: 60% to 80% busy, 32 GPUs.</div>
+  <div class="small" style="margin-top:14px">GreenPow market estimate, not a company census. GPU spend and cluster counts are not disclosed by the example company.</div>
 </div><div class="pg"></div></section>
 
 <!-- 2 Market buzzwords -->
@@ -152,26 +150,24 @@ input[type=range]{width:100%;accent-color:var(--blue);margin:4px 0 0}
 
 <!-- 3 Cost savings -->
 <section class="slide white" id="s5"><div class="wrap">
-  <h2 class="h2 reveal" data-pop><span>Cheaper. More power. Done by morning.</span></h2>
+  <h2 class="h2 reveal" data-pop><span>Model savings from annual GPU spend.</span></h2>
   <div class="calc" data-pop>
     <div class="panel">
-      <div class="field"><div class="top"><label for="gpuH">Startup GPU-hours a month</label><span class="val" id="gpuHv"></span></div><input type="range" id="gpuH" min="500" max="10000" step="100" value="3000"></div>
-      <div class="field"><div class="top"><label for="wait">Share that can wait</label><span class="val" id="waitv"></span></div><input type="range" id="wait" min="0" max="100" step="5" value="70"></div>
-      <div class="field"><div class="top"><label for="pNow">On-demand price</label><span class="val" id="pNowv"></span></div><input type="range" id="pNow" min="1" max="6" step="0.25" value="4"></div>
-      <div class="field" style="margin-bottom:0"><div class="top"><label for="pTon">Overnight price</label><span class="val" id="pTonv"></span></div><input type="range" id="pTon" min="1" max="4" step="0.25" value="2"></div>
+      <div class="field" style="margin-bottom:0"><div class="top"><label for="gpuSpend">Annual GPU spend (scenario)</label><span class="val" id="gpuSpendv"></span></div><input type="range" id="gpuSpend" min="1000000" max="3000000" step="100000" value="2000000"></div>
+      <div class="small" style="margin-top:18px">Model assumptions: GreenPow claim 16% (unverified); base case 6%; adoption cost $60,000. Spend range reflects the low-to-high market cases.</div>
     </div>
     <div class="panel">
       <div class="verdict" id="headline"></div>
       <div class="bars">
-        <div><div class="lab"><span>On demand</span><span id="dedTxt"></span></div><div class="track"><div class="fill ded" id="dedBar"></div></div></div>
-        <div><div class="lab"><span>With GreenPow</span><span id="gpTxt"></span></div><div class="track"><div class="fill gp" id="gpBar"></div></div></div>
+        <div><div class="lab"><span>GreenPow claim (16%, unverified)</span><span id="claimTxt"></span></div><div class="track"><div class="fill ded" id="claimBar"></div></div></div>
+        <div><div class="lab"><span>Base case (6%)</span><span id="baseTxt"></span></div><div class="track"><div class="fill gp" id="baseBar"></div></div></div>
       </div>
       <div class="out">
-        <div id="oCost">-<span>cost</span></div>
-        <div>+56,064<span>GPU-hours a year, per 32-GPU cluster</span></div>
-        <div>By 06:00<span>overnight jobs finish</span></div>
+        <div id="claimOut">-<span>claimed saving / year</span></div>
+        <div id="baseOut">-<span>base-case saving / year</span></div>
+        <div id="netOut">-<span>base case after adoption cost</span></div>
       </div>
-      <div class="small" style="margin-top:10px" id="forGp"></div>
+      <div class="small" style="margin-top:10px" id="forGp">Illustrative estimates, not measured customer savings. At $1M-$3M spend: $160k-$480k on the claim, $60k-$180k in the base case, and $0-$120k after the assumed adoption cost.</div>
     </div>
   </div>
 </div><div class="pg"></div></section>
@@ -181,28 +177,42 @@ input[type=range]{width:100%;accent-color:var(--blue);margin:4px 0 0}
   <h2 class="h2 reveal" data-pop><span>GreenPow: move what can move. Fill the empty hours.</span></h2>
   <div class="split">
     <div>
-      <div id="weekGrid" aria-label="One 32-GPU cluster over one week, Monday to Sunday, hours 00 to 23"></div>
+      <div id="weekGrid" aria-label="Illustrative weekly schedule, Monday to Sunday, hours 00 to 23"></div>
       <div class="legend"><span><i style="background:var(--navy)"></i>Owner</span><span><i style="background:var(--lime)"></i>GreenPow jobs</span><span><i style="background:var(--idle)"></i>Idle</span></div>
     </div>
     <div>
-      <div class="state" data-s="1"><div class="big"><span class="u">60</span>%<small>busy</small></div></div>
-      <div class="state" data-s="2"><div class="big"><span class="u">80</span>%<small>busy</small></div></div>
+      <div class="state" data-s="1"><div class="big">Owner jobs<small>scheduled first</small></div></div>
+      <div class="state" data-s="2"><div class="big">Flexible jobs<small>shifted to spare hours</small></div></div>
     </div>
   </div>
   <div class="flow pop" data-pop style="--d:.6s"><span>Signals</span><span>Guardrails</span><span>Orchestration</span></div>
-  <div class="small" style="margin-top:10px">Buyer: ML lead. Owner earns from idle hours, GreenPow keeps 20%. Sold through health-tech hubs.</div>
+  <div class="small" style="margin-top:10px">Illustrative schedule only, not a measured cluster profile. The example company uses AWS and Kubernetes; GPU counts and spend are undisclosed.</div>
 </div><div class="pg"></div></section>
 
 <!-- 5 Pilot + ask -->
 <section class="slide dark" id="s7"><div class="wrap">
-  <h2 class="h2 reveal" data-pop><span>First pilot: prove it on real GPU bills.</span></h2>
+  <h2 class="h2 reveal" data-pop><span>First pilot: validate the savings against real GPU bills.</span></h2>
   <div class="hyp">
-    <div class="pop" data-pop style="--d:.1s"><b>60%</b>of work can wait</div>
-    <div class="pop" data-pop style="--d:.25s"><b>30%</b>cheaper</div>
-    <div class="pop" data-pop style="--d:.4s"><b>0</b>data-rule violations</div>
+    <div class="pop" data-pop style="--d:.1s"><b>$1-3M</b>annual GPU spend in market cases</div>
+    <div class="pop" data-pop style="--d:.25s"><b>6%</b>base-case savings assumption</div>
+    <div class="pop" data-pop style="--d:.4s"><b>$60k</b>assumed adoption cost</div>
   </div>
-  <div class="small pop" data-pop style="--d:.3s">Pass: 30% saved and 95% of deadlines met. Below 15%: stop.</div>
+  <div class="small pop" data-pop style="--d:.3s">Base-case annual savings are estimated at $60k-$180k gross, or $0-$120k after adoption cost. These are scenarios to validate, not measured results.</div>
   <div class="ask pop" data-pop style="--d:.5s">GreenPow turns <span>idle GPU-hours</span> into medtech AI.</div>
+</div><div class="pg"></div></section>
+
+<!-- Backup: example company -->
+<section class="slide" id="s10"><div class="wrap">
+  <h2 class="h2" style="font-size:1.6rem">Backup: Aqemia, Paris — target profile, not a customer case study</h2>
+  <div class="tiles">
+    <div class="tile">Funding<span>$100M total, including a $38M round in December 2024</span></div>
+    <div class="tile">Partner deal<span>Sanofi: up to $140M in upfront and milestone payments (December 2023)</span></div>
+    <div class="tile">Team<span>50+ people (December 2024); job post says 80+ and about 12 engineers</span></div>
+    <div class="tile">Compute<span>AWS and Kubernetes; bursty GPU campaigns</span></div>
+    <div class="tile">Not disclosed<span>GPU counts and GPU spend</span></div>
+    <div class="tile">Savings evidence<span>No measured GreenPow savings; calculator shows scenarios only</span></div>
+  </div>
+  <div class="small" style="margin-top:12px">Sources: BiopharmaTrend (funding and team), Fierce Biotech (Sanofi deal), Aqemia job post (team and compute).</div>
 </div><div class="pg"></div></section>
 
 <!-- Backup: canvas -->
@@ -232,8 +242,6 @@ input[type=range]{width:100%;accent-color:var(--blue);margin:4px 0 0}
   <div class="brow us"><div class="nm">GreenPow</div><div class="b">Spare capacity, matched to deadlines</div></div>
 </div><div class="pg"></div></section>
 
-<button class="arrow" id="prev" aria-label="Previous slide">&#8592;</button>
-<button class="arrow" id="next" aria-label="Next slide">&#8594;</button>
 <div id="dots" role="tablist" aria-label="Slides"></div>
 </div>
 
@@ -271,38 +279,36 @@ input[type=range]{width:100%;accent-color:var(--blue);margin:4px 0 0}
   for(d=0;d<5;d++)for(h=0;h<=5;h++)SETS[2].push([d,h]);
   for(h=0;h<=2;h++)SETS[2].push([5,h]);
   var CLS={1:'owner',2:'gp'},timers=[];
-  function tween(el,from,to,dur){if(REDUCED){el.textContent=num(to);return}var t0=performance.now();(function tick(t){var p=Math.min((t-t0)/dur,1),e=1-Math.pow(1-p,3);el.textContent=num(from+(to-from)*e);if(p<1)requestAnimationFrame(tick)})(t0)}
-  function resetGrid(){timers.forEach(clearTimeout);timers=[];$$('.c',grid).forEach(function(c){c.className='c';c.style.removeProperty('--cd')});$$('.state').forEach(function(s){s.classList.remove('on')});$('.state[data-s="1"] .u').textContent='60';$('.state[data-s="2"] .u').textContent='80'}
-  function stage(n){SETS[n].forEach(function(a){var c=cells[a[0]][a[1]];c.classList.add(CLS[n],'pc');c.style.setProperty('--cd',(a[1]*22+a[0]*30)+'ms')});var s=$('.state[data-s="'+n+'"]');s.classList.add('on');if(n===1)tween($('.u',s),0,60,900);if(n===2)tween($('.u',s),60,80,900)}
+  function resetGrid(){timers.forEach(clearTimeout);timers=[];$$('.c',grid).forEach(function(c){c.className='c';c.style.removeProperty('--cd')});$$('.state').forEach(function(s){s.classList.remove('on')})}
+  function stage(n){SETS[n].forEach(function(a){var c=cells[a[0]][a[1]];c.classList.add(CLS[n],'pc');c.style.setProperty('--cd',(a[1]*22+a[0]*30)+'ms')});$('.state[data-s="'+n+'"]').classList.add('on')}
   function runGrid(){resetGrid();timers.push(setTimeout(function(){stage(1)},300));timers.push(setTimeout(function(){stage(2)},2000))}
   resetGrid();grid.addEventListener('click',runGrid);
 
   /* savings */
-  var inp={};['gpuH','wait','pNow','pTon'].forEach(function(i){inp[i]=$('#'+i);inp[i].addEventListener('input',calc)});
+  var spend=$('#gpuSpend');spend.addEventListener('input',calc);
   var calcLive=false;
   function calc(){
-    var H=+inp.gpuH.value,W=+inp.wait.value/100,NOW=+inp.pNow.value,TON=+inp.pTon.value;
-    $('#gpuHv').textContent=num(H)+' h';$('#waitv').textContent=Math.round(W*100)+'%';$('#pNowv').textContent='$'+NOW.toFixed(2);$('#pTonv').textContent='$'+TON.toFixed(2);
-    var today=H*NOW,gp=H*(1-W)*NOW+H*W*TON,save=today-gp,pct=today?save/today*100:0,hl=$('#headline');
-    if(save>=0){hl.style.color='';hl.innerHTML='Startup saves <b>'+money(save*12)+'</b> a year';$('#oCost').innerHTML=Math.round(pct)+'%<span>cheaper than on demand</span>'}
-    else{hl.style.color='var(--red)';hl.textContent='Startup pays '+money(-save*12)+' more a year';$('#oCost').innerHTML='0%<span>no saving at these prices</span>'}
-    $('#dedTxt').textContent=money(today)+' / month';$('#gpTxt').textContent=money(gp)+' / month';
-    var mx=Math.max(today,gp)||1;
-    $('#dedBar').style.width=(calcLive?today/mx*100:0)+'%';$('#gpBar').style.width=(calcLive?gp/mx*100:0)+'%';
-    $('#forGp').textContent='Owner earns about '+money(32*8760*.4*.5*TON*.8)+' a year from idle hours. GreenPow keeps 20%: '+money(H*W*12*TON*.2)+' a year per startup. Assumes 40% idle, half resold.';
+    var S=+spend.value,claim=S*.16,base=S*.06,net=base-60000;
+    $('#gpuSpendv').textContent=money(S);
+    $('#headline').innerHTML='Base case nets <b>'+money(Math.max(net,0))+'</b> a year after adoption cost';
+    $('#claimTxt').textContent=money(claim)+' / year';
+    $('#baseTxt').textContent=money(base)+' / year';
+    $('#claimOut').innerHTML=money(claim)+'<span>claimed saving / year</span>';
+    $('#baseOut').innerHTML=money(base)+'<span>base-case saving / year</span>';
+    $('#netOut').innerHTML=money(Math.max(net,0))+'<span>base case after adoption cost</span>';
+    $('#claimBar').style.width=(calcLive?100:0)+'%';
+    $('#baseBar').style.width=(calcLive?37.5:0)+'%';
   }
   calc();
 
   /* navigation: arrows only */
   var dots=$('#dots');
   slides.forEach(function(s,i){var b=document.createElement('button');b.type='button';b.setAttribute('aria-label','Slide '+(i+1));b.addEventListener('click',function(){show(i);b.blur()});dots.appendChild(b)});
-  function setDots(){$$('#dots button').forEach(function(b,i){b.classList.toggle('on',i===idx)});$('#prev').style.visibility=idx===0?'hidden':'visible';$('#next').style.visibility=idx===N-1?'hidden':'visible'}
+  function setDots(){$$('#dots button').forEach(function(b,i){b.classList.toggle('on',i===idx)})}
   function enter(i){var s=slides[i];$$('[data-pop]',s).forEach(function(el){el.classList.remove('in')});void s.offsetWidth;$$('[data-pop]',s).forEach(function(el){el.classList.add('in')});$$('[data-count]',s).forEach(runCount);if(s.id==='s6')runGrid();if(s.id==='s5'){calcLive=true;setTimeout(calc,350)}}
   function leave(i){var s=slides[i];$$('[data-pop]',s).forEach(function(el){el.classList.remove('in')});if(s.id==='s6')resetGrid();if(s.id==='s5'){calcLive=false;calc()}}
   function show(n){n=Math.max(0,Math.min(N-1,n));if(n===idx)return;var old=idx;idx=n;slides[old].classList.remove('active');slides[n].classList.add('active');setDots();setThread();setTimeout(function(){if(idx!==old)leave(old)},480);enter(n)}
   function go(dir){show(idx+dir)}
-  $('#prev').addEventListener('click',function(){go(-1);this.blur()});
-  $('#next').addEventListener('click',function(){go(1);this.blur()});
   document.addEventListener('keydown',function(e){
     var tag=e.target&&e.target.tagName;
     if(/^(INPUT|TEXTAREA|SELECT)$/.test(tag)||e.metaKey||e.ctrlKey||e.altKey)return;
