@@ -65,16 +65,6 @@ p{margin:0}
 .market-point:first-of-type{border-top:0}
 .market-close{font:700 clamp(1.05rem,2.1vw,1.5rem)/1.15 'Space Grotesk',sans-serif;margin-top:8px;color:var(--navy)}
 .market-foot{font-size:.68rem;color:var(--muted);margin-top:4px}
-.market-point .mp{display:block;font:400 .88rem 'IBM Plex Sans',sans-serif;color:var(--muted);margin-top:1px}
-.mk-big{font:700 clamp(1.7rem,3.2vw,2.5rem)/1.1 'Space Grotesk',sans-serif;margin:2px 0 6px}
-.mk-big i{font-style:normal;color:var(--blue)}
-.market-col .small a{color:var(--navy)}
-.mk-steps{display:grid;grid-template-columns:1fr auto 1fr auto 1fr;gap:6px;align-items:stretch;margin-top:8px}
-.mk-step{border:1px solid var(--line);border-radius:12px;padding:10px 8px;text-align:center;background:#fff}
-.mk-step b{display:block;font:700 1.25rem 'Space Grotesk',sans-serif}
-.mk-step span{display:block;font-size:.76rem;color:var(--muted);margin-top:3px;line-height:1.3}
-.mk-step.hi{background:var(--lime);border-color:var(--lime)}.mk-step.hi span{color:var(--navy)}
-.mk-arrow{align-self:center;color:var(--blue);font-weight:700}
 /* savings */
 .panel{background:var(--paper);border:1px solid var(--line);padding:18px;border-radius:18px;box-shadow:0 18px 40px rgba(11,42,74,.06)}
 .calc{display:grid;grid-template-columns:minmax(0,4.7fr) minmax(0,7.3fr);gap:26px;margin-top:12px;align-items:stretch}
@@ -143,7 +133,7 @@ input[type=range]{width:100%;accent-color:var(--blue);margin:10px 0 0;cursor:poi
 .brow{display:grid;grid-template-columns:12rem 1fr;gap:6px 22px;padding:14px 0;border-top:1px solid var(--line);align-items:baseline}
 .brow .nm{font:700 1.3rem 'Space Grotesk',sans-serif}.brow .b{color:var(--muted);font-size:1.1rem}
 .brow.us{background:linear-gradient(90deg,#EAF6D9,transparent 85%)}.brow.us .b{color:var(--navy);font-weight:600}
-@media(max-width:860px){.stats,.tiles,.calc,.split,.hyp,.out,.market-fit{grid-template-columns:1fr}.mk-steps{grid-template-columns:1fr}.mk-arrow{transform:rotate(90deg);justify-self:center}.market-col{padding:12px 16px}.market-point{padding:7px 0}.market-close{margin-top:10px}.bmc{grid-template-columns:1fr;grid-template-areas:none}.bmc>div{grid-area:auto!important}.brow{grid-template-columns:1fr}#thread span{padding:3px 6px;font-size:.6rem}}
+@media(max-width:860px){.stats,.tiles,.calc,.split,.hyp,.out,.market-fit{grid-template-columns:1fr}.market-col{padding:12px 16px}.market-point{padding:7px 0}.market-close{margin-top:10px}.bmc{grid-template-columns:1fr;grid-template-areas:none}.bmc>div{grid-area:auto!important}.brow{grid-template-columns:1fr}#thread span{padding:3px 6px;font-size:.6rem}}
 </style>
 </head>
 <body>
@@ -167,53 +157,27 @@ input[type=range]{width:100%;accent-color:var(--blue);margin:10px 0 0;cursor:poi
   </div>
 </div><div class="pg"></div></section>
 
-<!-- 2 Market -->
+<!-- 2 Market fit -->
 <section class="slide" id="s4"><div class="wrap">
-  <h2 class="h2 reveal" data-pop style="font-size:clamp(1.65rem,3.4vw,2.7rem);margin-bottom:12px"><span>The market: AI drug discovery</span></h2>
+  <h2 class="h2 reveal" data-pop style="font-size:clamp(1.65rem,3.4vw,2.7rem);margin-bottom:10px"><span>Drug discovery needs GPUs it can't afford to keep.</span></h2>
   <div class="market-fit">
     <div class="market-col pop" data-pop style="--d:.1s">
-      <h3>Why it fits</h3>
-      <div class="market-point">Very high compute<span class="mp">Leaders run 500 to 1,500+ GPUs</span></div>
-      <div class="market-point">Work that can wait<span class="mp">Batch campaigns</span></div>
-      <div class="market-point">Many places to run<span class="mp">Cloud, on-prem, supercomputers</span></div>
-      <h3 style="margin-top:14px">Who we target</h3>
-      <div class="market-point">Growth-stage firms spending $1M to $3M a year on GPUs<span class="mp">Under $1M, the saving is too small</span></div>
+      <h3>Their problem today</h3>
+      <div class="market-point">GPU demand spikes, then drops</div>
+      <div class="market-point">Buy idle or rent at peak prices</div>
+      <div class="market-point">Compute eats the science runway</div>
+      <div class="market-point">Compound libraries need trusted clouds</div>
     </div>
     <div class="market-col pop" data-pop style="--d:.25s">
-      <h3>Market size</h3>
-      <div class="mk-big">$6.93B <i>&rarr;</i> $16.52B</div>
-      <div class="small">Global AI in drug discovery revenue, 2025 to 2034, 10.1% a year. <a href="https://www.biospace.com/press-releases/artificial-intelligence-ai-in-drug-discovery-market-size-expected-to-reach-usd-16-52-billion-by-2034" target="_blank" rel="noopener">Precedence Research via BioSpace</a></div>
-      <h3 style="margin-top:14px">Reachable pool: ~60 firms (estimate)</h3>
-      <div class="mk-steps">
-        <div class="mk-step"><b>200+</b><span>AI-biotech start-ups worldwide (2023)</span></div>
-        <div class="mk-arrow">&rarr;</div>
-        <div class="mk-step"><b>~27%</b><span>of recent funding deals are European: ~55 firms</span></div>
-        <div class="mk-arrow">&rarr;</div>
-        <div class="mk-step hi"><b>60 &times; $2M</b><span>= $120M a year of GPU spend (assumed)</span></div>
-      </div>
+      <h3>Why it's the right fit</h3>
+      <div class="market-point">Batch jobs can wait overnight</div>
+      <div class="market-point">Millions of molecules parallelize</div>
+      <div class="market-point">Checkpoint, resume, tolerate preemption</div>
+      <div class="market-point">Milestones matter, not milliseconds</div>
     </div>
   </div>
-  <div class="market-foot">Sources: Precedence Research via BioSpace; IntuitionLabs (GPU counts, BCG start-up count); NewMarket Pitch (deal share); team estimate. The pool is a rough estimate, not a count.</div>
-</div><div class="pg"></div></section>
-
-<!-- 2b Example: Aqemia -->
-<section class="slide" id="s11"><div class="wrap">
-  <h2 class="h2 reveal" data-pop style="font-size:clamp(1.65rem,3.4vw,2.7rem);margin-bottom:12px"><span>Example buyer: Aqemia</span></h2>
-  <div class="tiles pop" data-pop style="grid-template-columns:repeat(2,1fr);margin:0 0 14px;--d:.1s">
-    <div class="tile">$100M<span>Raised, including a $38M round in December 2024</span></div>
-    <div class="tile">~12 engineers<span>SRE job post, undated</span></div>
-  </div>
-  <div class="market-fit">
-    <div class="market-col pop" data-pop style="--d:.25s">
-      <h3>What it runs</h3>
-      <div class="market-point">AWS and Kubernetes, with a platform team already planning &ldquo;GPU fleets to plan and optimize&rdquo;</div>
-    </div>
-    <div class="market-col pop" data-pop style="--d:.4s">
-      <h3>What GreenPow could offer</h3>
-      <div class="market-point">At an assumed $1M to $3M of GPU spend, the claimed 16% saving is $160k to $480k a year</div>
-    </div>
-  </div>
-  <div class="market-foot">Sources: BiopharmaTrend (funding), Aqemia SRE job post (team and compute). Aqemia's GPU spend is not disclosed.</div>
+  <div class="market-close pop" data-pop style="--d:.4s">The most flexible GPU demand in health AI, paying the least flexible prices.</div>
+  <div class="market-foot">Virtual screening · protein structure prediction · molecular dynamics · generative chemistry</div>
 </div><div class="pg"></div></section>
 
 <!-- 3 Cost savings -->
@@ -290,6 +254,20 @@ input[type=range]{width:100%;accent-color:var(--blue);margin:10px 0 0;cursor:poi
   <div class="ask pop" data-pop style="--d:.5s">GreenPow turns <span>idle GPU-hours</span> into medtech AI.</div>
 </div><div class="pg"></div></section>
 
+<!-- Backup: example company -->
+<section class="slide" id="s10"><div class="wrap">
+  <h2 class="h2" style="font-size:1.6rem">Backup: Aqemia, Paris — target profile, not a customer case study</h2>
+  <div class="tiles">
+    <div class="tile">Funding<span>$100M total, including a $38M round in December 2024</span></div>
+    <div class="tile">Partner deal<span>Sanofi: up to $140M in upfront and milestone payments (December 2023)</span></div>
+    <div class="tile">Team<span>50+ people (December 2024); job post says 80+ and about 12 engineers</span></div>
+    <div class="tile">Compute<span>AWS and Kubernetes; bursty GPU campaigns</span></div>
+    <div class="tile">Not disclosed<span>GPU counts and GPU spend</span></div>
+    <div class="tile">Savings evidence<span>No measured GreenPow savings; calculator shows scenarios only</span></div>
+  </div>
+  <div class="small" style="margin-top:12px">Sources: BiopharmaTrend (funding and team), Fierce Biotech (Sanofi deal), Aqemia job post (team and compute).</div>
+</div><div class="pg"></div></section>
+
 <!-- Backup: canvas -->
 <section class="slide white" id="s8"><div class="wrap">
   <h2 class="h2" style="font-size:1.6rem;margin-bottom:0">Backup: business model canvas</h2>
@@ -327,7 +305,7 @@ input[type=range]{width:100%;accent-color:var(--blue);margin:10px 0 0;cursor:poi
   function $$(s,r){return Array.prototype.slice.call((r||document).querySelectorAll(s))}
   function money(n){return '$'+Math.round(n).toLocaleString('en-US')}
   function num(n){return Math.round(n).toLocaleString('en-US')}
-  var slides=$$('.slide'),N=slides.length,idx=0,MAIN=6;
+  var slides=$$('.slide'),N=slides.length,idx=0,MAIN=5;
 
   function fitAll(){slides.forEach(function(sec){var w=$('.wrap',sec);if(!w)return;w.style.zoom=1;var cs=getComputedStyle(sec);var avail=sec.clientHeight-parseFloat(cs.paddingTop)-parseFloat(cs.paddingBottom);var need=w.scrollHeight;if(need>avail)w.style.zoom=Math.max(.45,avail/need*.98)})}
   window.addEventListener('resize',fitAll);
@@ -336,7 +314,7 @@ input[type=range]{width:100%;accent-color:var(--blue);margin:10px 0 0;cursor:poi
   slides.forEach(function(s,i){var p=$('.pg',s);if(p)p.textContent=i===0?'':i<=MAIN?i+' / '+MAIN:'Backup'});
 
   /* red thread */
-  var TH=['Numbers','Market','Example','Savings','Solution','Pilot'],th=$('#thread');
+  var TH=['Numbers','Market','Savings','Solution','Pilot'],th=$('#thread');
   th.innerHTML=TH.map(function(t){return '<span>'+t+'</span>'}).join('');
   function setThread(){th.classList.toggle('off',idx===0||idx>MAIN);$$('span',th).forEach(function(s,i){s.className=i+1===idx?'on':(i+1<idx?'done':'')})}
 
