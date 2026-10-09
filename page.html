@@ -48,18 +48,6 @@ p{margin:0}
 .ph i:after{content:"logo";position:absolute;inset:0;display:grid;place-items:center;font:700 .7rem 'IBM Plex Sans';color:var(--navy)}
 .t0 h1{font-size:clamp(2.6rem,6vw,5rem);line-height:1.03;font-weight:700;max-width:14ch;margin-bottom:20px}
 .t0 h1 b{color:var(--lime)}
-/* laptop + crane */
-.two{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:48px;align-items:center}
-.vis{width:100%;max-width:440px;margin:0 auto;display:block}
-.cpu{transform-origin:left center;transform-box:fill-box;transform:scaleX(.9);transition:transform 1.8s cubic-bezier(.3,.7,.2,1) .7s}
-.in .cpu{transform:scaleX(.06)}
-.punch{margin-top:18px;font:700 clamp(1.3rem,2.4vw,1.9rem) 'Space Grotesk',sans-serif;color:var(--lime-ink)}
-.zz{font:700 22px 'Space Grotesk',sans-serif;fill:var(--blue);opacity:0;animation:zz 3s ease-in-out infinite}
-.zz:nth-of-type(2){animation-delay:.6s}.zz:nth-of-type(3){animation-delay:1.2s}
-@keyframes zz{0%,100%{opacity:0}50%{opacity:.95}}
-.swing{transform-origin:190px 62px;animation:sw 5s ease-in-out infinite}
-@keyframes sw{0%,100%{transform:rotate(-1.5deg)}50%{transform:rotate(1.5deg)}}
-@media(prefers-reduced-motion:reduce){.zz{animation:none;opacity:.8}.swing{animation:none}.cpu{transition:none}}
 /* stats */
 .hero h1{font-size:clamp(2.2rem,5vw,4.2rem);line-height:1.05;font-weight:700;max-width:17ch;margin-bottom:10px}
 .stats{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:34px}
@@ -123,7 +111,7 @@ input[type=range]{width:100%;accent-color:var(--blue);margin:4px 0 0}
 .brow{display:grid;grid-template-columns:12rem 1fr;gap:6px 22px;padding:14px 0;border-top:1px solid var(--line);align-items:baseline}
 .brow .nm{font:700 1.3rem 'Space Grotesk',sans-serif}.brow .b{color:var(--muted);font-size:1.1rem}
 .brow.us{background:linear-gradient(90deg,#EAF6D9,transparent 85%)}.brow.us .b{color:var(--navy);font-weight:600}
-@media(max-width:860px){.two,.stats,.tiles,.calc,.split,.hyp,.out{grid-template-columns:1fr}.bmc{grid-template-columns:1fr;grid-template-areas:none}.bmc>div{grid-area:auto!important}.brow{grid-template-columns:1fr}.arrow{display:none}#thread span{padding:3px 6px;font-size:.6rem}}
+@media(max-width:860px){.stats,.tiles,.calc,.split,.hyp,.out{grid-template-columns:1fr}.bmc{grid-template-columns:1fr;grid-template-areas:none}.bmc>div{grid-area:auto!important}.brow{grid-template-columns:1fr}.arrow{display:none}#thread span{padding:3px 6px;font-size:.6rem}}
 </style>
 </head>
 <body>
@@ -137,44 +125,7 @@ input[type=range]{width:100%;accent-color:var(--blue);margin:4px 0 0}
   <p class="sub pop" data-pop style="--d:.5s">Idle GPUs, put to work for European medtech AI.</p>
 </div></section>
 
-<!-- 1 Audience: laptop -->
-<section class="slide white" id="s1"><div class="wrap two">
-  <div>
-    <h2 class="h2 reveal" data-pop><span>How busy is your laptop right now?</span></h2>
-    <p class="sub pop" data-pop style="--d:.4s">Be honest. Mostly waiting.</p>
-    <p class="punch pop" data-pop style="--d:.9s">You don't mind. It cost about €1,000.</p>
-  </div>
-  <svg class="vis pop" data-pop style="--d:.2s" viewBox="0 0 360 250" role="img" aria-label="Laptop with a nearly empty usage bar">
-    <rect x="50" y="10" width="260" height="165" rx="12" fill="#0B2A4A"/>
-    <rect x="62" y="22" width="236" height="141" rx="5" fill="#0D3C70"/>
-    <text x="80" y="62" fill="#C5D6EA" font-size="15" font-family="IBM Plex Sans">Processor use</text>
-    <rect x="80" y="76" width="200" height="24" rx="5" fill="#16508F"/>
-    <rect class="cpu" x="80" y="76" width="200" height="24" rx="5" fill="#8BD13F"/>
-    <text x="80" y="136" fill="#fff" font-size="22" font-family="Space Grotesk" font-weight="700">Idle most of the day</text>
-    <path d="M20 182h320l-22 28H42z" fill="#D3DCE6"/><rect x="150" y="182" width="60" height="6" rx="3" fill="#8499B0"/>
-  </svg>
-</div><div class="pg"></div></section>
-
-<!-- 2 Crane -->
-<section class="slide" id="s2"><div class="wrap two">
-  <svg class="vis pop" data-pop viewBox="0 0 420 310" role="img" aria-label="A tower crane standing idle">
-    <rect x="0" y="290" width="420" height="6" fill="#D3DCE6"/>
-    <rect x="130" y="276" width="120" height="16" fill="#0B2A4A"/>
-    <path d="M174 276V70h32v206M174 100l32 40M206 100l-32 40M174 150l32 40M206 150l-32 40M174 200l32 40M206 200l-32 40" stroke="#0B2A4A" stroke-width="5" fill="none"/>
-    <rect x="40" y="52" width="360" height="12" fill="#0D3C70"/>
-    <rect x="50" y="64" width="40" height="30" fill="#4A6078"/><rect x="170" y="38" width="40" height="22" rx="3" fill="#2F8CE8"/>
-    <path d="M174 52L190 14L206 52" stroke="#0B2A4A" stroke-width="4" fill="none"/>
-    <g class="swing"><line x1="340" y1="64" x2="340" y2="190" stroke="#0B2A4A" stroke-width="3"/><rect x="326" y="190" width="28" height="22" rx="4" fill="#8BD13F"/></g>
-    <text class="zz" x="362" y="150">z</text><text class="zz" x="376" y="128" font-size="28">Z</text><text class="zz" x="394" y="100">Z</text>
-  </svg>
-  <div>
-    <h2 class="h2 reveal" data-pop><span>Same story. Bigger bill.</span></h2>
-    <p class="sub pop" data-pop style="--d:.4s">A crane between projects: still on site, still paid for, not lifting.</p>
-    <p class="punch pop" data-pop style="--d:.9s">A GPU cluster is that crane.</p>
-  </div>
-</div><div class="pg"></div></section>
-
-<!-- 3 Stats -->
+<!-- 1 Stats -->
 <section class="slide dark hero" id="s3"><div class="wrap">
   <h1 class="reveal" data-pop><span>Medtech AI overpays for GPUs. Europe's GPUs sit idle.</span></h1>
   <div class="stats">
@@ -185,7 +136,7 @@ input[type=range]{width:100%;accent-color:var(--blue);margin:4px 0 0}
   <div class="small" style="margin-top:14px">Sources: GreenPow, VentureBeat survey (July 2026). The 56,064 is our model: 60% to 80% busy, 32 GPUs.</div>
 </div><div class="pg"></div></section>
 
-<!-- 4 Market buzzwords -->
+<!-- 2 Market buzzwords -->
 <section class="slide" id="s4"><div class="wrap">
   <h2 class="h2 reveal" data-pop><span>Medtech AI can't just rent anything.</span></h2>
   <div class="tiles">
@@ -199,7 +150,7 @@ input[type=range]{width:100%;accent-color:var(--blue);margin:4px 0 0}
   <div class="small" style="margin-top:12px">European Health Data Space: Regulation (EU) 2025/327.</div>
 </div><div class="pg"></div></section>
 
-<!-- 5 Cost savings -->
+<!-- 3 Cost savings -->
 <section class="slide white" id="s5"><div class="wrap">
   <h2 class="h2 reveal" data-pop><span>Cheaper. More power. Done by morning.</span></h2>
   <div class="calc" data-pop>
@@ -225,7 +176,7 @@ input[type=range]{width:100%;accent-color:var(--blue);margin:4px 0 0}
   </div>
 </div><div class="pg"></div></section>
 
-<!-- 6 Solution -->
+<!-- 4 Solution -->
 <section class="slide" id="s6"><div class="wrap">
   <h2 class="h2 reveal" data-pop><span>GreenPow: move what can move. Fill the empty hours.</span></h2>
   <div class="split">
@@ -242,7 +193,7 @@ input[type=range]{width:100%;accent-color:var(--blue);margin:4px 0 0}
   <div class="small" style="margin-top:10px">Buyer: ML lead. Owner earns from idle hours, GreenPow keeps 20%. Sold through health-tech hubs.</div>
 </div><div class="pg"></div></section>
 
-<!-- 7 Pilot + ask -->
+<!-- 5 Pilot + ask -->
 <section class="slide dark" id="s7"><div class="wrap">
   <h2 class="h2 reveal" data-pop><span>First pilot: prove it on real GPU bills.</span></h2>
   <div class="hyp">
@@ -293,7 +244,7 @@ input[type=range]{width:100%;accent-color:var(--blue);margin:4px 0 0}
   function $$(s,r){return Array.prototype.slice.call((r||document).querySelectorAll(s))}
   function money(n){return '$'+Math.round(n).toLocaleString('en-US')}
   function num(n){return Math.round(n).toLocaleString('en-US')}
-  var slides=$$('.slide'),N=slides.length,idx=0,MAIN=7;
+  var slides=$$('.slide'),N=slides.length,idx=0,MAIN=5;
 
   function fitAll(){slides.forEach(function(sec){var w=$('.wrap',sec);if(!w)return;w.style.zoom=1;var cs=getComputedStyle(sec);var avail=sec.clientHeight-parseFloat(cs.paddingTop)-parseFloat(cs.paddingBottom);var need=w.scrollHeight;if(need>avail)w.style.zoom=Math.max(.45,avail/need*.98)})}
   window.addEventListener('resize',fitAll);
@@ -302,7 +253,7 @@ input[type=range]{width:100%;accent-color:var(--blue);margin:4px 0 0}
   slides.forEach(function(s,i){var p=$('.pg',s);if(p)p.textContent=i===0?'':i<=MAIN?i+' / '+MAIN:'Backup'});
 
   /* red thread */
-  var TH=['You','Crane','Numbers','Market','Savings','Solution','Pilot'],th=$('#thread');
+  var TH=['Numbers','Market','Savings','Solution','Pilot'],th=$('#thread');
   th.innerHTML=TH.map(function(t){return '<span>'+t+'</span>'}).join('');
   function setThread(){th.classList.toggle('off',idx===0||idx>MAIN);$$('span',th).forEach(function(s,i){s.className=i+1===idx?'on':(i+1<idx?'done':'')})}
 
