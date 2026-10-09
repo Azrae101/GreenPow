@@ -57,6 +57,14 @@ p{margin:0}
 .tile{border-left:4px solid var(--blue);background:var(--white);padding:14px 16px;font:700 1.45rem 'Space Grotesk',sans-serif}
 .tile span{display:block;font:400 1rem 'IBM Plex Sans',sans-serif;color:var(--muted);margin-top:2px}
 .tile:nth-child(2n){border-color:var(--lime)}
+/* market fit */
+.market-fit{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:8px}
+.market-col{background:#fff;border:1px solid var(--line);border-radius:16px;padding:13px 18px}
+.market-col h3{font-size:1.05rem;margin-bottom:6px}
+.market-point{padding:10px 0;border-top:1px solid var(--line);font:600 1rem 'Space Grotesk',sans-serif;color:var(--navy)}
+.market-point:first-of-type{border-top:0}
+.market-close{font:700 clamp(1.05rem,2.1vw,1.5rem)/1.15 'Space Grotesk',sans-serif;margin-top:8px;color:var(--navy)}
+.market-foot{font-size:.68rem;color:var(--muted);margin-top:4px}
 /* savings */
 .panel{background:var(--paper);border:1px solid var(--line);padding:18px;border-radius:18px;box-shadow:0 18px 40px rgba(11,42,74,.06)}
 .calc{display:grid;grid-template-columns:minmax(0,4.7fr) minmax(0,7.3fr);gap:26px;margin-top:12px;align-items:stretch}
@@ -125,7 +133,7 @@ input[type=range]{width:100%;accent-color:var(--blue);margin:10px 0 0;cursor:poi
 .brow{display:grid;grid-template-columns:12rem 1fr;gap:6px 22px;padding:14px 0;border-top:1px solid var(--line);align-items:baseline}
 .brow .nm{font:700 1.3rem 'Space Grotesk',sans-serif}.brow .b{color:var(--muted);font-size:1.1rem}
 .brow.us{background:linear-gradient(90deg,#EAF6D9,transparent 85%)}.brow.us .b{color:var(--navy);font-weight:600}
-@media(max-width:860px){.stats,.tiles,.calc,.split,.hyp,.out{grid-template-columns:1fr}.bmc{grid-template-columns:1fr;grid-template-areas:none}.bmc>div{grid-area:auto!important}.brow{grid-template-columns:1fr}#thread span{padding:3px 6px;font-size:.6rem}}
+@media(max-width:860px){.stats,.tiles,.calc,.split,.hyp,.out,.market-fit{grid-template-columns:1fr}.market-col{padding:12px 16px}.market-point{padding:7px 0}.market-close{margin-top:10px}.bmc{grid-template-columns:1fr;grid-template-areas:none}.bmc>div{grid-area:auto!important}.brow{grid-template-columns:1fr}#thread span{padding:3px 6px;font-size:.6rem}}
 </style>
 </head>
 <body>
@@ -149,18 +157,27 @@ input[type=range]{width:100%;accent-color:var(--blue);margin:10px 0 0;cursor:poi
   </div>
 </div><div class="pg"></div></section>
 
-<!-- 2 Market buzzwords -->
+<!-- 2 Market fit -->
 <section class="slide" id="s4"><div class="wrap">
-  <h2 class="h2 reveal" data-pop><span>Medtech AI can't just rent anything.</span></h2>
-  <div class="tiles">
-    <div class="tile pop" data-pop style="--d:.1s">Data sovereignty<span>Patient data stays in its zone</span></div>
-    <div class="tile pop" data-pop style="--d:.25s">27 countries<span>One EU health data space</span></div>
-    <div class="tile pop" data-pop style="--d:.4s">Deadline-aware<span>Trial and model dates are fixed</span></div>
-    <div class="tile pop" data-pop style="--d:.55s">Carbon-aware<span>Run when energy is cleaner</span></div>
-    <div class="tile pop" data-pop style="--d:.7s">Zero new megawatts<span>Use what is already built</span></div>
-    <div class="tile pop" data-pop style="--d:.85s">Spare capacity<span>Idle hours become income</span></div>
+  <h2 class="h2 reveal" data-pop style="font-size:clamp(1.65rem,3.4vw,2.7rem);margin-bottom:10px"><span>Drug discovery needs GPUs it can't afford to keep.</span></h2>
+  <div class="market-fit">
+    <div class="market-col pop" data-pop style="--d:.1s">
+      <h3>Their problem today</h3>
+      <div class="market-point">GPU demand spikes, then drops</div>
+      <div class="market-point">Buy idle or rent at peak prices</div>
+      <div class="market-point">Compute eats the science runway</div>
+      <div class="market-point">Compound libraries need trusted clouds</div>
+    </div>
+    <div class="market-col pop" data-pop style="--d:.25s">
+      <h3>Why it's the right fit</h3>
+      <div class="market-point">Batch jobs can wait overnight</div>
+      <div class="market-point">Millions of molecules parallelize</div>
+      <div class="market-point">Checkpoint, resume, tolerate preemption</div>
+      <div class="market-point">Milestones matter, not milliseconds</div>
+    </div>
   </div>
-  <div class="small" style="margin-top:12px">European Health Data Space: Regulation (EU) 2025/327.</div>
+  <div class="market-close pop" data-pop style="--d:.4s">The most flexible GPU demand in health AI, paying the least flexible prices.</div>
+  <div class="market-foot">Virtual screening · protein structure prediction · molecular dynamics · generative chemistry</div>
 </div><div class="pg"></div></section>
 
 <!-- 3 Cost savings -->
@@ -224,7 +241,6 @@ input[type=range]{width:100%;accent-color:var(--blue);margin:10px 0 0;cursor:poi
       <div class="state" data-s="2"><div class="big">Flexible jobs<small>shifted to spare hours</small></div></div>
     </div>
   </div>
-  <div class="flow pop" data-pop style="--d:.6s"><span>Signals</span><span>Guardrails</span><span>Orchestration</span></div>
 </div><div class="pg"></div></section>
 
 <!-- 5 Pilot + ask -->
