@@ -38,9 +38,6 @@ p{margin:0}
 .stat .n{font-family:'Space Grotesk',sans-serif;font-size:clamp(3rem,7vw,5.6rem);font-weight:700;line-height:1}
 .stat .n.accent{color:var(--lime)}
 .stat .t{margin-top:8px;color:#C5D6EA;font-size:1.1rem}
-.chips{display:flex;flex-wrap:wrap;gap:10px;margin-top:22px}
-.chips span{border:1px solid rgba(255,255,255,.35);border-radius:99px;padding:6px 16px;font-size:1rem;color:#E4EEFA}
-.chips b{color:var(--lime);font-family:'Space Grotesk',sans-serif}
 /* 2 */
 .split{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(0,1fr);gap:48px;align-items:center;margin-top:10px}
 #weekGrid{display:grid;grid-template-columns:34px repeat(24,minmax(0,1fr));gap:3px;cursor:pointer}
@@ -57,7 +54,7 @@ p{margin:0}
 .state[data-s="2"].on{border-color:var(--lime)}
 .state .big{font-family:'Space Grotesk',sans-serif;font-size:3rem;font-weight:700;line-height:1.05}
 .state .big small{font-family:'IBM Plex Sans',sans-serif;font-size:.95rem;font-weight:400;color:var(--muted);margin-left:8px}
-.rules3{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:22px}
+.rules3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:22px}
 .rules3>div{border-left:4px solid var(--blue);padding:2px 0 2px 12px;font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:1.1rem}
 .rules3 span{display:block;font-family:'IBM Plex Sans',sans-serif;font-weight:400;color:var(--muted);font-size:.95rem}
 /* 3 */
@@ -134,13 +131,12 @@ input[type=range]{width:100%;accent-color:var(--blue);margin:4px 0 0}
     <div class="stat pop" data-pop style="--d:.45s"><div class="n" data-count="86" data-suffix="%">86%</div><div class="t">of GPU owners run at half capacity or less</div></div>
     <div class="stat pop" data-pop style="--d:.7s"><div class="n" data-count="27">27</div><div class="t">EU countries, one health data space</div></div>
   </div>
-  <div class="chips pop" data-pop style="--d:.9s"><span><b>Buyer</b> startup ML lead</span><span><b>User</b> ML engineers</span><span><b>Today</b> on-demand cloud GPUs</span></div>
   <div class="small" style="margin-top:14px">Sources: GreenPow CEO, VentureBeat survey (July 2026), Regulation (EU) 2025/327.</div>
 </div><div class="pg"></div></section>
 
 <!-- 2 Solution -->
 <section class="slide white" id="s2"><div class="wrap">
-  <h2 class="h2 reveal" data-pop><span>Move what can move. Fill the empty hours.</span></h2>
+  <h2 class="h2 reveal" data-pop><span>Fill the empty hours. Keep data in its zone.</span></h2>
   <div class="split">
     <div>
       <div id="weekGrid" aria-label="One 32-GPU cluster over one week, hour by hour"></div>
@@ -156,10 +152,9 @@ input[type=range]{width:100%;accent-color:var(--blue);margin:4px 0 0}
     </div>
   </div>
   <div class="rules3">
-    <div class="pop" data-pop style="--d:.2s">Run now<span>Live inference</span></div>
-    <div class="pop" data-pop style="--d:.35s">Can wait<span>Model training</span></div>
-    <div class="pop" data-pop style="--d:.5s">Run elsewhere<span>Pseudonymised data, in the EU</span></div>
-    <div class="pop" data-pop style="--d:.65s">Stay fixed<span>Identifiable data, in its country</span></div>
+    <div class="pop" data-pop style="--d:.2s">Identifiable<span>stays in its country</span></div>
+    <div class="pop" data-pop style="--d:.35s">Pseudonymised<span>stays in the EU</span></div>
+    <div class="pop" data-pop style="--d:.5s">Non-patient data<span>runs anywhere</span></div>
   </div>
 </div><div class="pg"></div></section>
 
@@ -193,7 +188,6 @@ input[type=range]{width:100%;accent-color:var(--blue);margin:4px 0 0}
         <div><div class="lab"><span>With GreenPow</span><span id="gpTxt"></span></div><div class="track"><div class="fill gp" id="gpBar"></div></div></div>
       </div>
       <div class="forgp"><div id="forOwner"></div><div id="forGp"></div></div>
-      <div class="small" style="margin-top:8px">Assumes 40% idle, half resold, 20% take rate.</div>
     </div>
   </div>
 </div><div class="pg"></div></section>
@@ -212,7 +206,7 @@ input[type=range]{width:100%;accent-color:var(--blue);margin:4px 0 0}
     <div class="pop" data-pop style="--d:.3s">
       <h3>Distribution</h3>
       <div class="dist">
-        <div>Who pays<span>Buyer: ML lead. User: ML engineers.</span></div>
+        <div>First customer<span>A European health AI startup</span></div>
         <div>Channel<span>Health-tech clusters, accelerators</span></div>
         <div>Partners<span>HPC centres, university hospitals</span></div>
       </div>
@@ -236,8 +230,7 @@ input[type=range]{width:100%;accent-color:var(--blue);margin:4px 0 0}
       <div class="vd" id="vd"></div>
     </div>
   </div>
-  <div class="small pop" data-pop style="--d:.2s;margin-top:18px">Data needed: startup GPU-hours and deadlines, cluster idle hours.</div>
-  <div class="ask pop" data-pop style="--d:.4s">GreenPow turns <span>idle GPU-hours</span> into useful work.</div>
+  <div class="ask pop" data-pop style="--d:.2s">Ask: <span>intros to one HPC centre and one health AI startup.</span></div>
 </div><div class="pg"></div></section>
 
 <!-- Backup: canvas -->
