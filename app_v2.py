@@ -4,16 +4,28 @@ GreenPow challenge: a scrolling story page (page.html) hosted in Streamlit.
 Run:  pip install -r requirements.txt  &&  streamlit run app.py
 Present: scroll, or use the arrow keys / Page Down / space to step through slides.
 
-All text, numbers and design live in page.html.
+Edit CONFIG below (your survey result). Edit page.html for text, numbers and design.
 """
 
+import json
 import pathlib
 
 import streamlit as st
 import streamlit.components.v1 as components
 
+# =====================================================================
+# CONFIG: fill in after your survey
+# =====================================================================
+CONFIG = {
+    "survey": {
+        "n": None,    # e.g. 24  (number of respondents)
+        "pct": None,  # e.g. 71  (percent who agreed)
+        "claim": "say idle GPUs or compute costs hold back their AI projects",
+    }
+}
+
 st.set_page_config(
-    page_title="GreenPow: private AI for brain research",
+    page_title="GreenPow: private AI at the price of shared AI",
     page_icon="⚡",
     layout="wide",
     initial_sidebar_state="collapsed",
@@ -33,6 +45,7 @@ iframe { display: block; border: 0; width: 100%; }
 )
 
 page = (pathlib.Path(__file__).parent / "page.html").read_text(encoding="utf-8")
+page = page.replace("<!--CONFIG-->", f"<script>window.__CONFIG__ = {json.dumps(CONFIG)};</script>")
 
 # The page resizes its own frame to fit the content; this height is just the starting value.
 components.html(page, height=5200, scrolling=False)
