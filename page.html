@@ -58,23 +58,39 @@ p{margin:0}
 .tile span{display:block;font:400 1rem 'IBM Plex Sans',sans-serif;color:var(--muted);margin-top:2px}
 .tile:nth-child(2n){border-color:var(--lime)}
 /* savings */
-.panel{background:var(--paper);border:1px solid var(--line);padding:18px}
-.calc{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:32px;margin-top:6px;align-items:start}
-.field{margin-bottom:14px}
+.panel{background:var(--paper);border:1px solid var(--line);padding:18px;border-radius:18px;box-shadow:0 18px 40px rgba(11,42,74,.06)}
+.calc{display:grid;grid-template-columns:minmax(0,4.7fr) minmax(0,7.3fr);gap:26px;margin-top:12px;align-items:stretch}
+.calc-panel{background:linear-gradient(180deg,#fff,#f4f7fb);border:1px solid rgba(138,159,180,.35);border-radius:20px;padding:20px;box-shadow:inset 0 1px 0 rgba(255,255,255,.8)}
+.calc-head{display:flex;justify-content:space-between;align-items:baseline;gap:12px;margin-bottom:16px}
+.eyebrow-mini{font:700 .68rem 'Space Grotesk',sans-serif;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.calc-head strong{font:700 1.8rem 'Space Grotesk',sans-serif;letter-spacing:-.04em;color:var(--navy)}
+.field{margin-bottom:18px}
 .field .top{display:flex;justify-content:space-between;align-items:baseline;gap:12px}
-.field label{font-weight:600}
-.field .val{font:700 1.15rem 'Space Grotesk',sans-serif;white-space:nowrap}
-input[type=range]{width:100%;accent-color:var(--blue);margin:4px 0 0}
-.verdict{font:700 clamp(1.8rem,3.4vw,2.7rem)/1.1 'Space Grotesk',sans-serif}
+.field label{font-weight:600;color:var(--navy)}
+.field .val{font:700 1.15rem 'Space Grotesk',sans-serif;white-space:nowrap;color:var(--navy)}
+input[type=range]{width:100%;accent-color:var(--blue);margin:10px 0 0;cursor:pointer}
+.calc-scale{display:flex;justify-content:space-between;margin-top:8px;color:var(--muted);font-size:.8rem}
+.calc-note{margin-top:18px;color:var(--muted);font-size:.92rem;line-height:1.5}
+.verdict{font:700 clamp(1.8rem,3.4vw,2.7rem)/1.1 'Space Grotesk',sans-serif;letter-spacing:-.04em;color:var(--navy)}
 .verdict b{color:var(--lime-ink)}
-.bars{margin:16px 0 8px;display:grid;gap:10px}
-.lab{display:flex;justify-content:space-between;font-size:.92rem;margin-bottom:4px}
-.lab span:last-child{font-family:'Space Grotesk',sans-serif;font-weight:700}
-.track{height:26px;background:var(--idle);border-radius:4px;overflow:hidden}
+.bars{margin:18px 0 14px;display:grid;gap:14px}
+.lab{display:flex;justify-content:space-between;align-items:center;gap:12px;font-size:.92rem;margin-bottom:5px}
+.lab span:first-child{color:var(--muted)}
+.lab span:last-child{font-family:'Space Grotesk',sans-serif;font-weight:700;color:var(--navy)}
+.track{height:18px;background:linear-gradient(90deg,#edf3f9,#dfeaf5);border-radius:999px;overflow:hidden;border:1px solid rgba(141,162,183,.35)}
 .fill{height:100%;width:0;transition:width .7s cubic-bezier(.2,.8,.2,1)}
-.fill.ded{background:var(--navy)}.fill.gp{background:var(--lime)}
-.out{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:14px}
-.out div{background:var(--white);border-left:4px solid var(--blue);padding:8px 12px;font:700 1.25rem 'Space Grotesk',sans-serif}
+.fill.ded{background:linear-gradient(90deg,#0B2A4A,#1E4E7A)}.fill.gp{background:linear-gradient(90deg,#8BD13F,#6FB733)}
+.metric-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:16px}
+.metric{background:var(--white);border:1px solid rgba(138,159,180,.35);border-left:4px solid var(--blue);padding:12px 12px 10px;border-radius:12px;min-height:104px}
+.metric strong{display:block;font:700 clamp(1.1rem,2.2vw,1.8rem)/1.1 'Space Grotesk',sans-serif;color:var(--navy)}
+.metric span{display:block;font:400 .78rem 'IBM Plex Sans',sans-serif;color:var(--muted);margin-top:4px;line-height:1.4}
+.metric:nth-child(2){border-left-color:var(--lime)}
+.metric:nth-child(3){border-left-color:var(--navy)}
+.result-kicker{font:700 .68rem 'Space Grotesk',sans-serif;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:8px}
+.out{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:16px}
+.out div{background:var(--white);border-left:4px solid var(--blue);padding:8px 12px;font:700 1.25rem 'Space Grotesk',sans-serif;border-radius:10px;border:1px solid rgba(138,159,180,.35);border-left-width:4px}
+.out div:nth-child(2){border-left-color:var(--lime)}
+.out div:nth-child(3){border-left-color:var(--navy)}
 .out span{display:block;font:400 .85rem 'IBM Plex Sans',sans-serif;color:var(--muted)}
 /* solution grid */
 .split{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(0,1fr);gap:48px;align-items:center;margin-top:6px}
@@ -131,7 +147,6 @@ input[type=range]{width:100%;accent-color:var(--blue);margin:4px 0 0}
     <div class="stat pop" data-pop style="--d:.45s"><div class="n" data-count="60">60</div><div class="t">Base case · $2M average GPU spend · $120M total</div></div>
     <div class="stat pop" data-pop style="--d:.7s"><div class="n accent" data-count="120">120</div><div class="t">High case · $3M average GPU spend · $360M total</div></div>
   </div>
-  <div class="small" style="margin-top:14px">GreenPow market estimate, not a company census. GPU spend and cluster counts are not disclosed by the example company.</div>
 </div><div class="pg"></div></section>
 
 <!-- 2 Market buzzwords -->
@@ -152,22 +167,46 @@ input[type=range]{width:100%;accent-color:var(--blue);margin:4px 0 0}
 <section class="slide white" id="s5"><div class="wrap">
   <h2 class="h2 reveal" data-pop><span>Model savings from annual GPU spend.</span></h2>
   <div class="calc" data-pop>
-    <div class="panel">
-      <div class="field" style="margin-bottom:0"><div class="top"><label for="gpuSpend">Annual GPU spend (scenario)</label><span class="val" id="gpuSpendv"></span></div><input type="range" id="gpuSpend" min="1000000" max="3000000" step="100000" value="2000000"></div>
-      <div class="small" style="margin-top:18px">Model assumptions: GreenPow claim 16% (unverified); base case 6%; adoption cost $60,000. Spend range reflects the low-to-high market cases.</div>
+    <div class="calc-panel">
+      <div class="calc-head"><span class="eyebrow-mini">Adjust assumptions</span><strong>Scenario</strong></div>
+      <div class="field">
+        <div class="top"><label for="spend">GPU spend a year</label><span class="val" id="spendv"></span></div>
+        <input type="range" id="spend" min="1000000" max="3000000" step="100000" value="2000000">
+        <div class="calc-scale"><span>$1M</span><span>$3M</span></div>
+      </div>
+      <div class="field">
+        <div class="top"><label for="share">Share that can wait</label><span class="val" id="sharev"></span></div>
+        <input type="range" id="share" min="0" max="100" step="5" value="50">
+        <div class="calc-scale"><span>0%</span><span>100%</span></div>
+      </div>
+      <div class="field">
+        <div class="top"><label for="real">Savings realised</label><span class="val" id="realv"></span></div>
+        <input type="range" id="real" min="0" max="100" step="5" value="75">
+        <div class="calc-scale"><span>0%</span><span>100%</span></div>
+      </div>
+      <div class="field">
+        <div class="top"><label for="claim">GreenPow's claimed savings</label><span class="val" id="claimv"></span></div>
+        <input type="range" id="claim" min="0" max="20" step="1" value="16">
+        <div class="calc-scale"><span>0%</span><span>20%</span></div>
+      </div>
+      <div class="field" style="margin-bottom:0">
+        <div class="top"><label for="adopt">Adoption cost</label><span class="val" id="adoptv"></span></div>
+        <input type="range" id="adopt" min="0" max="120000" step="5000" value="60000">
+        <div class="calc-scale"><span>$0</span><span>$120k</span></div>
+      </div>
     </div>
-    <div class="panel">
+    <div class="calc-panel">
+      <div class="result-kicker">Estimated annual result</div>
       <div class="verdict" id="headline"></div>
       <div class="bars">
-        <div><div class="lab"><span>GreenPow claim (16%, unverified)</span><span id="claimTxt"></span></div><div class="track"><div class="fill ded" id="claimBar"></div></div></div>
-        <div><div class="lab"><span>Base case (6%)</span><span id="baseTxt"></span></div><div class="track"><div class="fill gp" id="baseBar"></div></div></div>
+        <div><div class="lab"><span>GreenPow's claimed savings</span><span id="claimTxt"></span></div><div class="track"><div class="fill ded" id="claimBar"></div></div></div>
+        <div><div class="lab"><span>Base case</span><span id="baseTxt"></span></div><div class="track"><div class="fill gp" id="baseBar"></div></div></div>
       </div>
       <div class="out">
-        <div id="claimOut">-<span>claimed saving / year</span></div>
+        <div id="claimOut">-<span>claim / year</span></div>
         <div id="baseOut">-<span>base-case saving / year</span></div>
         <div id="netOut">-<span>base case after adoption cost</span></div>
       </div>
-      <div class="small" style="margin-top:10px" id="forGp">Illustrative estimates, not measured customer savings. At $1M-$3M spend: $160k-$480k on the claim, $60k-$180k in the base case, and $0-$120k after the assumed adoption cost.</div>
     </div>
   </div>
 </div><div class="pg"></div></section>
@@ -186,7 +225,6 @@ input[type=range]{width:100%;accent-color:var(--blue);margin:4px 0 0}
     </div>
   </div>
   <div class="flow pop" data-pop style="--d:.6s"><span>Signals</span><span>Guardrails</span><span>Orchestration</span></div>
-  <div class="small" style="margin-top:10px">Illustrative schedule only, not a measured cluster profile. The example company uses AWS and Kubernetes; GPU counts and spend are undisclosed.</div>
 </div><div class="pg"></div></section>
 
 <!-- 5 Pilot + ask -->
@@ -197,7 +235,6 @@ input[type=range]{width:100%;accent-color:var(--blue);margin:4px 0 0}
     <div class="pop" data-pop style="--d:.25s"><b>6%</b>base-case savings assumption</div>
     <div class="pop" data-pop style="--d:.4s"><b>$60k</b>assumed adoption cost</div>
   </div>
-  <div class="small pop" data-pop style="--d:.3s">Base-case annual savings are estimated at $60k-$180k gross, or $0-$120k after adoption cost. These are scenarios to validate, not measured results.</div>
   <div class="ask pop" data-pop style="--d:.5s">GreenPow turns <span>idle GPU-hours</span> into medtech AI.</div>
 </div><div class="pg"></div></section>
 
@@ -285,19 +322,25 @@ input[type=range]{width:100%;accent-color:var(--blue);margin:4px 0 0}
   resetGrid();grid.addEventListener('click',runGrid);
 
   /* savings */
-  var spend=$('#gpuSpend');spend.addEventListener('input',calc);
+  var inp={};['spend','share','real','claim','adopt'].forEach(function(i){inp[i]=$('#'+i);inp[i].addEventListener('input',calc)});
   var calcLive=false;
   function calc(){
-    var S=+spend.value,claim=S*.16,base=S*.06,net=base-60000;
-    $('#gpuSpendv').textContent=money(S);
-    $('#headline').innerHTML='Base case nets <b>'+money(Math.max(net,0))+'</b> a year after adoption cost';
-    $('#claimTxt').textContent=money(claim)+' / year';
+    var S=+inp.spend.value,W=+inp.share.value/100,R=+inp.real.value/100,C=+inp.claim.value/100,A=+inp.adopt.value;
+    var claimed=S*C,base=S*W*R*C,net=base-A;
+    var claimMax=+inp.spend.max*(+inp.claim.max/100);
+    $('#spendv').textContent=money(S);
+    $('#sharev').textContent=Math.round(W*100)+'%';
+    $('#realv').textContent=Math.round(R*100)+'%';
+    $('#claimv').textContent=Math.round(C*100)+'%';
+    $('#adoptv').textContent=money(A);
+    $('#headline').innerHTML=(net>=0?('Base case nets <b>'+money(net)+'</b> a year after adoption cost'):('Base case loses <b>'+money(-net)+'</b> a year after adoption cost'));
+    $('#claimTxt').textContent=money(claimed)+' / year';
     $('#baseTxt').textContent=money(base)+' / year';
-    $('#claimOut').innerHTML=money(claim)+'<span>claimed saving / year</span>';
+    $('#claimOut').innerHTML=money(claimed)+'<span>claim / year</span>';
     $('#baseOut').innerHTML=money(base)+'<span>base-case saving / year</span>';
     $('#netOut').innerHTML=money(Math.max(net,0))+'<span>base case after adoption cost</span>';
-    $('#claimBar').style.width=(calcLive?100:0)+'%';
-    $('#baseBar').style.width=(calcLive?37.5:0)+'%';
+    $('#claimBar').style.width=(calcLive?Math.min(100,(claimed/claimMax)*100):0)+'%';
+    $('#baseBar').style.width=(calcLive?Math.min(100,(base/claimMax)*100):0)+'%';
   }
   calc();
 
